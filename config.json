@@ -1,0 +1,1234 @@
+{
+  "title": "Audio Captioning Evaluation Task",
+  "description": "Please listen to the audio, and for EACH caption, rate it on Accuracy, Richness, and Overall Quality based on the guidelines on the right.",
+  "demographics": {
+    "age_ranges": ["Under 18", "18-25", "26-35", "36-50", "50+"],
+    "genders": ["Male", "Female","Prefer not to say"],
+    "languages": ["English", "German", "Dutch", "Chinese"]
+  },
+  "evaluation_metrics": ["Accuracy", "Richness", "Overall Quality"],
+  "guideline_sections": [
+    {
+      "title": "Task Overview",
+      "content": "<p>Listen to the audio clip and rate the text caption on a <b>1–5 scale</b> across <b>three independent dimensions</b>.</p><ul><li><b>Primary Anchors:</b> Use 1, 3, 5.</li><li><b>Secondary Anchors:</b> Use 2, 4 only for clear in-between cases.</li></ul>"
+    },
+    {
+      "title": "1. Accuracy",
+      "content": "<p><b>Definition:</b> Factual correctness (Emotion, events, speaker attributes).</p><p><b>Scoring:</b></p><ul><li><b>5 (Accurate):</b> All core info correct.</li><li><b>3 (Mostly Accurate):</b> Core correct, minor errors (gender/age/intensity).</li><li><b>1 (Hallucination):</b> Contradicts audio (wrong polarity/event).</li></ul><p><b>Key Rules:</b> Wrong emotion polarity = 1. adjacent emotion (angry vs furious) = 3-4.</p>"
+    },
+    {
+      "title": "2. Richness",
+      "content": "<p><b>Definition:</b> Specificity of acoustic details (Pitch, Tempo, Volume, Noise).</p><p><b>Scoring:</b></p><ul><li><b>5 (Rich):</b> 2+ correct distinct features.</li><li><b>3 (Moderate):</b> 1 correct feature or generic.</li><li><b>1 (Poor):</b> No meaningful detail.</li></ul>"
+    },
+    {
+      "title": "3. Overall Quality",
+      "content": "<p><b>Definition:</b> Naturalness, fluency, and balance.</p><p><b>Scoring:</b></p><ul><li><b>5 (Excellent):</b> Natural & informative.</li><li><b>3 (Acceptable):</b> Understandable but generic/stiff.</li><li><b>1 (Unusable):</b> Ungrammatical or misleading.</li></ul><p><b>Rule:</b> If Accuracy=1, usually Quality ≤ 2.</p>"
+    },
+    {
+      "title": "Appendix: Quick Logic",
+      "content": "<ol><li><b>Check Accuracy:</b> Wrong event? -> Score 1.</li><li><b>Check Details:</b> Correct acoustic features? (2+ = Score 5).</li><li><b>Final Quality:</b> High Acc + Bad Grammar = 3.</li></ol>"
+    }
+  ],
+  "questions": [
+    {
+      "id": "MSP-PODCAST_2357_0979.wav",
+      "src": "assets/audio/MSP-PODCAST_2357_0979.wav",
+      "label": "Sample 1",
+      "captions": [
+        { 
+          "id": "GT",
+          "text": "A female speaker articulates, \"it's like if after world war ii, germany would be like,\" in a quiet yet distinctly high-pitched voice. Her delivery is measured and unhurried, projecting a sense of calm authority rather than heaviness or dreariness. The tone is clear and composed, with a gentle, smooth quality and a subtle assertiveness that gives her words a quietly commanding presence."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech features a female speaker with a clear, conversational tone, delivering a partial analogy comparing post-WWII Germany to an unspecified current situation. Audio analysis shows stable pitch , low jitter , and consistent loudness, indicating vocal control. Emotion recognition is neutral, with no strong affect. Audio quality is high , with no distortion. The speaker’s voice resembles Vivica A. Fox  and Rita Dominic , suggesting similar vocal timbre. The sentence trails off mid-thought, implying an unfinished idea. Overall, the speech is coherent, well-articulated, and professionally recorded, with a calm, reflective delivery."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_0295_0501.wav",
+      "src": "assets/audio/MSP-PODCAST_0295_0501.wav",
+      "label": "Sample 2",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A male speaker delivers the lines \"it is pretty funny though. i mean, i haven't seen this shit in forever.\" with a bold, confident energy. His voice carries a commanding presence, resonating with a deep, rich timbre that projects loudly and clearly. Despite the slow, deliberate pace, his tone brims with spirited amusement and self-assurance, creating a captivating and vibrant atmosphere—free from any trace of melancholy or hesitation."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech, delivered by a North American male with a casual, incredulous tone, expresses skepticism about a film’s delayed release, questioning its demand ten years after a poorly performing predecessor. Audio features reveal a stable pitch , minimal pitch variation, and moderate loudness, suggesting controlled, conversational delivery. Low jitter and high SNR indicate clear audio with minimal distortion. The predicted emotion is \"surprised,\" aligning with the speaker’s skeptical tone. Audio quality is strong . Speaker resemblance is highest to Dee Snider , with moderate similarity to Joe Hockey and Jan Eliasson, suggesting a distinctive but not uniquely identifiable voice."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_0281_0042.wav",
+      "src": "assets/audio/MSP-PODCAST_0281_0042.wav",
+      "label": "Sample 3",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A female speaker exclaims, \"because I'm pretty sure they would've kicked his ass if he tried to just leave. right?\" Her voice rings out with vivid energy and lively confidence, carrying a high, spirited tone that asserts her point. The delivery has a medium pace and, while not especially loud, her words cut through with crackling intensity, the texture tinged with a raspy, slightly rough edge that lends her speech a raw, animated quality. She sounds both assertive and upbeat, commanding attention with her playful yet forceful attitude."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech features a female speaker delivering a confident, slightly amused, and assertive statement with a standard American accent. Audio analysis reveals stable pitch , low jitter, and consistent loudness, indicating clear, controlled vocal production. The predicted emotion is \"surprised,\" suggesting rhetorical emphasis. High SNR  and moderate reverberation  confirm excellent audio quality. The transcript reflects informal, colloquial language , reinforcing a casual tone. Speaker similarity identifies Antanas Guoga and Katie Hopkins as partial matches , but no strong resemblance. Overall, the speech conveys a confident, lighthearted judgment with high intelligibility and professional audio clarity."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_2055_0356.wav",
+      "src": "assets/audio/MSP-PODCAST_2055_0356.wav",
+      "label": "Sample 4",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A male speaker delivers the phrase \"by force, and then we use that to do all sorts of things\" with a commanding presence and vibrant energy, his manner radiating confidence and assertiveness. Despite the elevated intensity in his delivery, his voice remains deep and resonant, yet quiet and measured, never rising above a soft, controlled volume. His speech flows with a steady, even rhythm and maintains a smooth, clear timbre, conveying both authority and composure."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech features a male speaker with a calm, clear voice delivering the line: \"By force, and we use that to do all sorts of things.\" Audio analysis reveals stable pitch , low jitter, and moderate loudness, indicating controlled, neutral speech. Emotion recognition confirms a neutral affect. Audio quality is high , with no background noise. Pitch and spectral features suggest a natural, steady vocal delivery. Speaker similarity analysis shows a moderate resemblance to David Koechner , though not a strong match. The content implies a philosophical or explanatory tone on the concept of force, likely in a narrative or educational context. Overall, the speech is clear, emotionally neutral, and professionally recorded."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_1214_0210_0001.wav",
+      "src": "assets/audio/MSP-PODCAST_1214_0210_0001.wav",
+      "label": "Sample 5",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A male speaker delivers the line, \"I mean, to the point where there are clips of Glenn Beck putting on a Make America Great hat,\" in a bold, vibrant voice brimming with confident enthusiasm. His tone is commanding and energetic, projecting authority while radiating positivity. The speech is deep and resonant, carrying a booming presence that grabs attention. His delivery is smooth and clear, paced at a steady, engaging rhythm that underscores his lively assurance."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speaker delivers a conversational, mid-range vocal tone with a neutral emotional state, conveying mild incredulity. Audio quality is high, with excellent signal-to-noise ratio  and minimal reverberation , indicating clear recording conditions. Pitch features show moderate stability, with F0 values centered around 2 semitones from 27.5Hz, suggesting a calm but expressive delivery. Loudness and jitter are low, reflecting controlled speech. The transcript references Glenn Beck wearing a \"Make America Great\" hat, implying commentary on political culture. Speaker similarity identifies Ken Jeong and Hal Sparks as closest matches , suggesting a vocal resemblance to these comedic actors, though not a perfect match. Overall, the speech is clear, emotionally neutral, and stylistically aligned with satirical or observational commentary."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_0538_0039.wav",
+      "src": "assets/audio/MSP-PODCAST_0538_0039.wav",
+      "label": "Sample 6",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A male voice delivers the phrase \"and great thinking about such things\" with a confident, upbeat warmth. His words carry a relaxed, unhurried pace and are set in a deep, soft tone, giving the message a sense of calm authority. The voice remains clear but tinged with a slightly rough edge, suggesting gentle passion without being forceful or overpowering."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech features a male speaker with a calm, neutral emotional tone, delivering the phrase \"And great, great thinking about such things.\" Audio analysis shows stable pitch , minimal jitter, and consistent loudness, indicating controlled, deliberate speech. Low reverberation and high SNR  suggest clear audio quality. Pitch and loudness percentiles are flat, reflecting monotony. Emotion recognition predicts neutrality. Speaker similarity scores  suggest resemblance to Tim Daly, Russell Peters, and Victor Garber, though none are strongly matched. The speech appears introspective, possibly from a thoughtful or reflective context, with no strong emotional inflection."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_2336_0653.wav",
+      "src": "assets/audio/MSP-PODCAST_2336_0653.wav",
+      "label": "Sample 7",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A female speaker delivers the statement, \"it goes down to the fact that people who burn flags in this country are usually anarchists, anihilists. yeah,\" in a voice brimming with confidence and vigor. Her tone is lively and assertive, projecting both enthusiasm and authority. The speech is clear and smooth, resonating with a bright, energetic quality that draws listeners in. She maintains a high, compelling volume and a steady, engaging rhythm, exuding a self-assured charisma that commands attention without becoming overpowering."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech features a female speaker with a clear, slightly nasal voice and standard American accent, delivering a calm, declarative statement with measured confidence. Audio analysis shows stable pitch , low jitter , and minimal loudness variation, indicating controlled vocal production. Emotion recognition is neutral, aligning with the matter-of-fact tone. A brief male interjection  confirms agreement. High SNR  and moderate reverb  suggest good recording quality in a quiet, controlled environment. Speaker similarity points to Cindy Williams and Gail Simmons , indicating moderate resemblance in vocal characteristics. The content reflects a political commentary on flag burning, associating it with anarchists and nihilists."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_2357_0567.wav",
+      "src": "assets/audio/MSP-PODCAST_2357_0567.wav",
+      "label": "Sample 8",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A female speaker delivers the words, \"well, sometimes i do, but i don't mean to be condescending all the time. it's just, sometimes i am just incredibly shocked and,\" with a brisk, hurried pace that contrasts her subdued energy. Despite the softness of her voice, there is a commanding undertone—her speech is quiet yet carries an assertive, unwavering edge. The tone is high-pitched and her words have a rough, raspy quality, giving her delivery a strained, slightly grating texture that hints at underlying tension."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The 6-second audio features a clear, conversational female voice with a standard American accent, recorded in a quiet indoor environment. The transcript reveals self-awareness and mild exasperation, as the speaker justifies her tone, stating she “don’t mean to be condescending” and expresses being “incredibly shocked.” Audio features indicate stable pitch , low jitter, and consistent loudness, suggesting calm, controlled speech. Emotionally, the speaker is classified as “surprised,” with a slight upward inflection conveying genuine astonishment. High SNR  and moderate reverb  confirm excellent audio quality. Speaker similarity points to Loni Love , suggesting vocal resemblance. The abrupt ending implies an excerpt from a longer informal dialogue, likely a podcast or vlog."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_0722_0199_0001.wav",
+      "src": "assets/audio/MSP-PODCAST_0722_0199_0001.wav",
+      "label": "Sample 9",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A male speaker declares, \"listen, this is why i call her hilco, because,\" in a voice brimming with confident energy and bright enthusiasm. His delivery is measured and deliberate, unfolding at a leisurely pace, yet his tone exudes an unmistakable assertiveness and commanding presence. While his pitch and volume remain steady and natural, his words carry a rough, edgy texture, their edges tinged with a raspy, slightly unpolished quality that underscores his animated engagement."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech features a male speaker with a casual, slightly amused tone, delivering a brief, conversational line: \"She listen. This is why I call her Hilco.\" Audio analysis reveals stable pitch , low pitch variability, and moderate loudness, indicating calm, controlled speech. Emotion recognition predicts \"neutral,\" aligning with the tone. High SNR  and moderate reverb  suggest clear, slightly echoic recording quality. Speaker similarity points to Jim Gaffigan , Conan O’Brien , and Andrew Zimmern , indicating a comedic, mid-range vocal timbre. The speech is concise, likely part of a humorous anecdote, with minimal emotional intensity and strong vocal clarity."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_2357_0254.wav",
+      "src": "assets/audio/MSP-PODCAST_2357_0254.wav",
+      "label": "Sample 10",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A female speaker quickly delivers the words, \"you look focused. look, there's a lot of successful black women in particular, who are like that because it is so hard to get to where molly is,\" her tone carrying a subtle undercurrent of discouragement. Her voice is high-pitched and delicate, kept soft and restrained, and she speaks at a brisk, hurried pace that hints at unease. Despite her speed, her voice remains clear and smooth, but there is a gentle sense of timidity and emotional distance, as if she is holding back or feeling overshadowed."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speaker, a woman with a clear, confident, and assertive voice, delivers a passionate, conversational statement about the challenges faced by successful Black women, emphasizing the difficulty of reaching high achievement levels like Molly’s. Audio features reveal a slightly elevated, stable pitch  with minimal jitter  and consistent loudness, indicating vocal control. Emotion recognition predicts \"happy,\" suggesting upbeat, affirming tone. High SNR  and moderate reverb  confirm good audio quality. Speaker similarity shows resemblance to Loni Love , Yvette Nicole Brown , and Lorna Tolentino , indicating a vocal match with these public figures."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_0167_0157_0001.wav",
+      "src": "assets/audio/MSP-PODCAST_0167_0157_0001.wav",
+      "label": "Sample 11",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A female speaker delivers the line, \"but we get those kids to go to see broadway shows and sadly, we've had to purchase all the tickets,\" with vibrant enthusiasm and confident authority. Her voice is energetic and commanding, resonating with a lively, assertive strength that captures attention. She speaks at a brisk, rapid pace, and her words ring out with high volume, ensuring every syllable is heard. While her tone remains generally clear, there is a faint edge of roughness lending a touch of urgency and unpolished candor to her delivery."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech features a female speaker with a clear, slightly exasperated tone, conveying a sense of sadness through vocal emotion recognition. The pitch  is moderately stable, with minimal variation, suggesting controlled but weary delivery. Loudness is consistent, with low variability, indicating steady vocal effort. Audio quality is high, with strong signal-to-noise ratio  and moderate reverberation. The F1 frequency suggests a relatively neutral vowel space, typical of clear speech. The speaker bears resemblance to Audra McDonald, Alex Borstein, and Joy Behar , likely due to vocal timbre and speech rhythm. The content highlights a program supporting children’s access to Broadway, with the speaker expressing personal burden in funding tickets, underscoring emotional investment and systemic challenges."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_0368_1192.wav",
+      "src": "assets/audio/MSP-PODCAST_0368_1192.wav",
+      "label": "Sample 12",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A male speaker delivers the line \"ton in a week, and I don't get paid nearly as much as him, but\" with a confident, assertive energy that commands attention. His deep, resonant voice projects loudly and clearly, exuding a sense of authority and self-assurance. The tone is vigorous and animated, free of roughness, and maintains a smooth, polished texture throughout. His delivery is steady and engaging, brimming with high-spirited conviction."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech, delivered by a male speaker, conveys frustration and perceived injustice, with a transcript indicating he performs \"a shit ton\" of work weekly yet earns significantly less than a peer. Audio features reveal a stable pitch , low pitch variability, and moderate loudness, suggesting controlled but tense delivery. Emotion recognition predicts \"angry,\" aligning with the speaker’s tone of resentment. Audio quality is high , though moderate reverberation  suggests a slightly echoey environment. Speaker similarity points to Joss Whedon and Christopher Meloni , indicating a vocal resemblance to these actors, particularly in vocal timbre and intonation. Overall, the speech reflects a complaint rooted in inequity, delivered with emotional intensity and clear, intelligible audio."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_2384_0017.wav",
+      "src": "assets/audio/MSP-PODCAST_2384_0017.wav",
+      "label": "Sample 13",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A female speaker delivers the lines, \"look, girl, just drop the document. just give me something, man. i miss you so much. drop the doc. i tend to think it's,\" with vivid intensity and commanding presence. Her voice rings with a high, sharp pitch and a rough, raspy edge, each word laced with a grainy urgency that feels both assertive and emotionally charged. Though her loudness remains moderate, the strained, scratchy texture of her speech underscores a fervent impatience, making her energetic plea impossible to ignore."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech is a emotionally charged, urgent plea from a male speaker expressing deep longing and distress. The transcription reveals a desperate request to \"drop the document\" and a heartfelt confession of missing someone. Audio features indicate a stable pitch , low pitch variability, and moderate loudness, suggesting controlled but intense emotion. Low jitter and high SNR  imply clear, stable vocal production. Predicted emotion is \"sad,\" aligning with the pleading tone. Audio quality is strong, with minimal reverberation. Speaker similarity points to Gilbert Gottfried , Lolo Jones , and Loni Love , suggesting a vocal resemblance to these public figures, though not definitive. Overall, the speech conveys emotional urgency and personal distress."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_2343_0171.wav",
+      "src": "assets/audio/MSP-PODCAST_2343_0171.wav",
+      "label": "Sample 14",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A male speaker utters, \"I would get my ass handed to me. Probably. Right,\" in a subdued and relaxed tone tinged with gentle positivity. His voice is low and quiet, almost as if sharing a private admission, with a gravelly, rough-edged texture that gives his words an unpolished, slightly weary quality. The delivery is steady and measured, further underscoring a sense of quiet self-awareness and mild resignation."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech features a male speaker delivering the phrase “I would get my ass handed to me, no doubt” with neutral emotion, stable pitch , low jitter, and moderate loudness. Audio quality is high , though slight reverberation is present . The speaker’s vocal characteristics show minimal pitch variation and consistent formant frequency, suggesting calm, deliberate speech. The transcript reveals a brief exchange: a confident assertion followed by agreement . Speaker similarity analysis indicates resemblance to Kevin Clash , Michael Madsen , and Nick Thune , suggesting a mid-range vocal match to these male voices, likely due to shared vocal timbre or speech patterns. Overall, the speech conveys mild assertiveness with clear, well-articulated delivery."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_2400_0285.wav",
+      "src": "assets/audio/MSP-PODCAST_2400_0285.wav",
+      "label": "Sample 15",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A female speaker delivers the words, \"they hold. it was just a more frustrating process with other companies,\" in a soft, low-pitched voice that feels subdued and weary. Her tone is gentle and unhurried, carrying a sense of quiet resignation rather than enthusiasm or assertiveness. The voice is mostly smooth but edged with a faint roughness, hinting at underlying frustration without overt emotion or intensity."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech, delivered by a female speaker, conveys frustration and annoyance, as indicated by the predicted emotion \"angry\" and a conversational yet exasperated tone. Audio features reveal moderate pitch variation , low jitter , and stable loudness, suggesting clear, controlled speech. High SNR  and moderate reverberation  indicate good audio quality with slight room echo. The transcript reflects dissatisfaction with other companies’ processes. Speaker similarity scores  suggest resemblance to Amanda Palmer, Audra McDonald, and Ananda Lewis, though not strongly. Overall, the speech is articulate, emotionally charged, and technically well-recorded."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_1607_0033_0001.wav",
+      "src": "assets/audio/MSP-PODCAST_1607_0033_0001.wav",
+      "label": "Sample 16",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A female speaker says, \"and i had traumatized myself too much, and so, and i just wanted to get it done,\" with an unmistakable sense of distress. Her voice, though controlled and clear, carries a quiet but commanding presence, marked by an underlying intensity. She speaks softly, her words delivered in a slow, deliberate manner, each syllable revealing the weight of her experience. Despite the gentle volume, her tone is steady and self-assured, imbuing her admission with a forceful resolve and emotional depth."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech reveals a reflective, emotionally strained monologue by a British female speaker expressing self-inflicted trauma and a desire to conclude a difficult task. Audio features indicate a stable pitch , minimal pitch variation , and moderate loudness, suggesting controlled, subdued delivery. Jitter is low, indicating vocal stability. The predicted emotion is \"sad,\" aligning with the introspective tone. Audio quality is high , enhancing clarity. Speaker similarity points to Elīna Garanča , suggesting vocal resemblance, though not definitive. Overall, the speech conveys emotional exhaustion and resolve."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_2357_0140.wav",
+      "src": "assets/audio/MSP-PODCAST_2357_0140.wav",
+      "label": "Sample 17",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A female speaker softly utters, \"I don't think that's what it was intended, I think,\" her words carrying a faint sense of sorrow. Her high-pitched voice is gentle and muted, lacking force or presence. The delivery feels subdued and somewhat fragile, reflecting a low, weary energy without any hint of warmth or authority. The tone is clear and even, but colored by an undercurrent of sadness and resignation."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech features a female speaker with a clear, mid-range voice delivering a hesitant, thoughtful utterance: “I don't think that's what it was intended.” Pitch analysis shows stable F0 , minimal variation , and consistent pitch percentiles, indicating calm, controlled speech. Loudness is moderate and stable, with no significant fluctuations. Jitter is low , suggesting vocal stability. Emotion is classified as neutral, aligning with the reflective tone. Audio quality is high , with no distortion. Speaker similarity points to Loni Love , suggesting a plausible resemblance in vocal timbre and delivery style. Overall, the speech conveys cautious skepticism with professional clarity."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_2054_1340.wav",
+      "src": "assets/audio/MSP-PODCAST_2054_1340.wav",
+      "label": "Sample 18",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A male speaker delivers the line, \"her house burned down, donald trump just bought her a new house,\" with commanding energy and a sense of controlled intensity. His voice is deep and resonant, carrying a rough, raspy edge that hints at agitation or underlying tension. Though his volume is moderate, the texture of his speech feels gritty and unpolished, amplifying the emotional weight behind his words. His pace is steady and deliberate, suggesting a firm grip on the situation while still projecting a strong, assertive presence."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech is a concise, factual statement delivered by a North American male speaker in a neutral emotional tone. Audio features indicate stable pitch , minimal pitch variation, and consistent loudness, suggesting a calm, controlled delivery. High SNR  and moderate reverb  confirm clear audio with slight room echo. The transcript reveals a narrative of tragedy and generosity—someone’s house burned down, and Donald Trump purchased a replacement. Emotion recognition classifies the tone as neutral, aligning with the matter-of-fact delivery. Speaker similarity points to Dan Aykroyd, Richard Desmond, and Robert Herjavec , indicating a plausible vocal resemblance but no definitive match. Overall, the speech is clear, emotionally restrained, and stylistically neutral."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_1677_0010_0072.wav",
+      "src": "assets/audio/MSP-PODCAST_1677_0010_0072.wav",
+      "label": "Sample 19",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A male speaker delivers the line, \"dad were ripping each other apart. sex became something linked with sadness to me,\" with a commanding and forceful presence. His voice is deep and resonant, projecting power and intensity without any harshness, thanks to its smooth and steady quality. Though his tone is energetic and assertive, he maintains a measured, steady rhythm rather than rushing, capturing the weight of his words with both strength and emotional charge."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech, delivered by a British male speaker, reflects deep emotional distress over his parents' divorce, which shaped his negative association with sex. Audio analysis reveals a stable pitch , low pitch variability, and subdued loudness, indicating a calm yet somber tone. Low jitter suggests vocal stability, while high SNR  and moderate reverb  confirm clear audio quality. Emotion recognition identifies \"sad\" as the dominant emotion, aligning with the introspective, melancholic content. Speaker similarity points to resemblance with Roberto Martínez and Soon-Yi Previn , though not strongly. Overall, the speech conveys personal trauma with emotional authenticity and technical clarity. "
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_1908_1090.wav",
+      "src": "assets/audio/MSP-PODCAST_1908_1090.wav",
+      "label": "Sample 20",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A male speaker delivers the line, \"political side, it's very difficult for me to identify myself as that, because I do not agree with what the libertarian party does in most senses,\" with an unmistakably commanding presence and high energy. His words tumble out at a swift, breathless pace, and his tone is deep and resonant, yet carries a gritty, slightly rough edge that hints at underlying irritation. The overall effect is one of assertive frustration, as he firmly distances himself from the political group, his voice both forceful and textured, compelling attention without crossing into aggression."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speaker, a male with a clear, standard American accent, delivers a calm, thoughtful statement rejecting identification with the Libertarian Party due to ideological disagreement. Audio analysis reveals stable pitch , minimal jitter, and consistent loudness, indicating controlled, deliberate speech. Emotionally, the prediction is neutral, aligning with the measured tone. Audio quality is excellent , with no distortion. Speaker similarity suggests resemblance to Darren Criss  and Carla Bonner , though not strongly. The transcript reflects introspective political self-identification, emphasizing principled disagreement. Overall, the speech is articulate, emotionally restrained, and technically pristine. "
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_2329_0865.wav",
+      "src": "assets/audio/MSP-PODCAST_2329_0865.wav",
+      "label": "Sample 21",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A male speaker introduces himself with the words \"brio, a political communist for the miami herald. hey\" in a gruff, commanding manner. Despite the low, rumbling pitch and subdued volume, his voice carries an intense, forceful edge that signals high energy and authority. The texture is rough and raspy, hinting at strain and agitation, while his delivery is steady but unmistakably charged with underlying frustration."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The audio features indicate a male North American speaker with a neutral emotional state, low pitch variability , and stable vocal intensity . Minimal jitter and consistent F1 frequency suggest clear, controlled speech. The high SNR  and moderate reverb  confirm good audio quality. The speaker appears surprised or recognition-based, as inferred from the conversational tone. Transcription identifies Rio as a Miami Herald political columnist. Speaker similarity matches Nick Thune , suggesting vocal resemblance. Overall, the speech is a brief, clear introduction with neutral affect, high audio fidelity, and a recognizable vocal profile."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_0693_0428_0004.wav",
+      "src": "assets/audio/MSP-PODCAST_0693_0428_0004.wav",
+      "label": "Sample 22",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A woman speaks with vibrant confidence, her voice brimming with assertive energy and positivity as she declares, \"did not want the original ghostbusters in the movie at the end of the day. i just did not want them in the movie.\" Her tone is lively and self-assured, carrying a clear, polished quality at a steady, conversational pace—there is no weariness or frustration, only a strong, upbeat conviction in her words."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speaker, a woman, expresses firm, resolute disapproval of including the original Ghostbusters in a film, repeating her stance for emphasis. Audio features indicate a stable pitch , moderate loudness, and low jitter, suggesting controlled, deliberate speech. Emotionally, the tone is neutral yet slightly exasperated, conveyed through vocal delivery. Audio quality is high , with moderate reverberation. Speaker similarity points to Rachael Taylor and Yvonne Strahovski , indicating a vocal resemblance to these actresses. Overall, the speech reflects a confident, deliberate rejection with clear vocal articulation and minimal emotional variance."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_0668_0163.wav",
+      "src": "assets/audio/MSP-PODCAST_0668_0163.wav",
+      "label": "Sample 23",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A female speaker demands, \"a felony, how did he legally have a gun gun?\" Her voice rings out loud and sharp, charged with forceful urgency and assertiveness. The tone is high-pitched and commanding, her words delivered slowly yet with palpable intensity. A raw, raspy edge colors her speech, amplifying the sense of agitation and insistence in her questioning."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech features a woman expressing disbelief and frustration, questioning how someone with a felony conviction legally obtained a gun. Audio analysis reveals a stable pitch , low pitch variability, and moderate loudness, suggesting controlled yet tense delivery. Predicted emotion is \"fear,\" indicating anxiety or concern. Audio quality is high , with minimal reverberation , ensuring clarity. The speaker resembles Johanna Long, Sarah Bolger, and Janina Gavankar , suggesting a similar vocal timbre. A brief male affirmation  follows, adding context. Overall, the exchange conveys shock and concern over gun laws and criminal records."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_0723_0553_0003.wav",
+      "src": "assets/audio/MSP-PODCAST_0723_0553_0003.wav",
+      "label": "Sample 24",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A male speaker delivers the words, \"that's trying to fuel itself through bigotry. you don't think that that business is going to go out of business just by this,\" with a charged, commanding energy. His voice is loud and forceful, pressing his point with fast, urgent speech. The tone is sharp and rough-edged, marked by a gritty, strained quality that adds intensity and authority, gripping the audience with his fervor."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech conveys strong disapproval, with the speaker expressing disgust toward a business fueled by bigotry, asserting it won’t collapse due to such tactics. Audio analysis reveals a male voice with moderate pitch , stable pitch variation, and clear articulation. Loudness is consistent, with minimal jitter and good audio quality . The speaker sounds assertive, incredulous, and exasperated. Voice similarity suggests resemblance to Gilbert Gottfried, Ronan Farrow, and Whoopi Goldberg , though not strongly. Overall, the delivery is impactful, emphasizing moral condemnation with controlled intensity."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_1909_0655.wav",
+      "src": "assets/audio/MSP-PODCAST_1909_0655.wav",
+      "label": "Sample 25",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A male speaker delivers the line \"there's kind of a necessary growth that has to happen for all of the shows\" in a measured, unhurried manner. His deep, resonant voice carries a confident and assertive warmth, projecting a natural sense of authority and optimism. The tone is rich and smooth, radiating high energy and positivity without overpowering, making his words feel both uplifting and self-assured."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech features a male speaker with a calm, deliberate tone, discussing \"necessary growth\" for a group of shows. Audio analysis shows stable pitch , low jitter , and consistent loudness, indicating controlled, clear speech. Emotion recognition predicts \"neutral,\" aligning with the thoughtful delivery. High SNR  and moderate reverb  suggest good audio quality with slight room echo. Pitch and loudness percentiles are flat, reflecting monotony or focus. Speaker similarity points to Darren Criss , Jay Carney , and John Kasich , indicating a vocal resemblance to public figures with measured, articulate styles. Overall, the speech conveys a reflective, conceptual message with professional, stable vocal characteristics."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_0281_0090.wav",
+      "src": "assets/audio/MSP-PODCAST_0281_0090.wav",
+      "label": "Sample 26",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A woman utters, \"oh my god. it was awful,\" her voice laced with intense agitation and commanding presence. Though she speaks softly, her words are charged with a tense, forceful energy that demands attention. Each phrase emerges in a high-pitched, slow, deliberate cadence, while a harsh, raspy edge roughens her tone, underscoring her distress and making the discomfort in her recounting almost palpable."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech, \"Oh my god, it was awful,\" conveys intense distress and disgust, with a high-pitched, strained vocal quality indicating shock and revulsion. Audio features reveal a mean pitch of 3 semitones above 27.5Hz, low pitch variability , and high loudness , suggesting emotional intensity. Jitter is minimal, indicating vocal strain. Emotion recognition predicts \"sad,\" aligning with the speaker’s anguish. Audio quality is moderate , with noticeable reverberation . Speaker similarity points to Monica Seles, Manisha Koirala, and Gareth Gates , suggesting a female voice with a distinctive timbre. Overall, the speaker is emotionally overwhelmed, reacting to a deeply unpleasant experience."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_0723_0138_0001.wav",
+      "src": "assets/audio/MSP-PODCAST_0723_0138_0001.wav",
+      "label": "Sample 27",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A woman delivers the lines, \"I believe that's how that shakes out. It's just everything's gone, the playbook is done,\" with vivid enthusiasm and commanding presence. Her strong, lively voice rings out at a brisk pace, infusing her words with a confident, assertive energy. The volume is bold and projecting, while the overall tone remains clear but tinged with a raw, slightly coarse edge, lending her speech a touch of unpolished intensity."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech is a brief, declarative statement delivered by a female speaker with a clear, confident, and standard American accent. Audio analysis reveals a stable pitch , minimal jitter, and consistent loudness, indicating controlled, professional delivery. The predicted emotion is neutral, with a tone that is matter-of-fact and slightly resigned, suggesting acceptance of an inevitable outcome. Audio quality is excellent—high SNR  and moderate reverb —with no distortion. Speaker similarity shows resemblance to Natalie Portman , Kim Raver , and Elizabeth Olsen , indicating a plausible match to well-known actresses with similar vocal timbres."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_0611_0270.wav",
+      "src": "assets/audio/MSP-PODCAST_0611_0270.wav",
+      "label": "Sample 28",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A male speaker delivers the lines, \"they just wanted all the money, money, money, money, money. you talk about government or private sector folks being greedy,\" with a vivid, energetic force that commands attention. His voice is bold and assertive, ringing out with high volume and a confident, unwavering clarity. The tone is spirited and animated, revealing a strong sense of dominance and engagement, while the delivery feels direct and purposeful, underscoring his pointed critique without any roughness or strain."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech features a male speaker with a strong, assertive voice expressing indignation and disgust toward perceived greed in government and the private sector. The repetition of \"money\" emphasizes frustration, delivered with rapid, emphatic pacing. Audio analysis shows stable pitch , minimal jitter, and consistent loudness, indicating controlled yet intense delivery. Low reverberation and high SNR suggest clear recording quality. Emotion recognition confirms disgust, aligning with the accusatory tone. Speaker similarity points to Shane West  and Nigahiga , suggesting a vocal resemblance to these individuals, though not a definitive match. Overall, the speech conveys sharp criticism with a focused, emotionally charged delivery."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_0696_0223_0001.wav",
+      "src": "assets/audio/MSP-PODCAST_0696_0223_0001.wav",
+      "label": "Sample 29",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A woman speaks with unmistakable vigor and confidence, her voice bright and lively as she rapidly delivers the line, \"I mean if you show it too much, you're on the verge of it being that special anymore.\" Her high-pitched, energetic tone projects assertiveness and enthusiasm, while her speech flows at a brisk, animated pace. The sound of her voice remains crystal-clear and polished, capturing the audience with its commanding and engaging presence."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech features a female speaker with a clear, conversational tone, delivering a reflective thought on overexposure diminishing specialness. Audio analysis shows stable pitch , low pitch variability , and moderate loudness , indicating controlled, calm delivery. Jitter is minimal, suggesting vocal stability. Emotion recognition predicts \"neutral,\" aligning with the thoughtful, measured tone. High SNR  and moderate reverberation  confirm good audio quality. Speaker similarity points to Brooklyn Sudano  and Sammy Adams , suggesting a vocal resemblance to these individuals. Overall, the speech is articulate, emotionally neutral, and well-recorded."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_0381_1266.wav",
+      "src": "assets/audio/MSP-PODCAST_0381_1266.wav",
+      "label": "Sample 30",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A male speaker delivers the line, \"georgia mother gets 190 years in prison for locking child in chicken coop. georgia? shocking.\" with a powerfully assertive tone that radiates animated energy and confidence. His voice carries a deep, resonant quality and maintains a steady, conversational pace. Though not especially loud, his delivery is unmistakably commanding, and a rough, slightly raspy edge colors his words, underscoring the gravity and astonishment in his reaction."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The audio features indicate a male North American speaker with clear, high-quality audio and minimal background noise . The speech is delivered in a sarcastic, incredulous tone, reflecting surprise . Pitch  and loudness are stable, with moderate vocal variability. The transcript reports a shocking news story: a Georgia mother sentenced to 190 years for confining her child in a chicken coop. The speaker’s delivery emphasizes disbelief, enhancing the story’s sensational impact. Audio resemblance suggests similarity to comedians Nick Thune and Aden Young, likely due to tone and cadence. Overall, the speech combines factual reporting with ironic delivery, amplifying the story’s emotional resonance."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_0779_0418.wav",
+      "src": "assets/audio/MSP-PODCAST_0779_0418.wav",
+      "label": "Sample 31",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A woman speaks with unmistakable confidence and fervor, her words ringing out loud and clear: \"these people are ridiculous and there were a lot of different times where I wanted to kind of give up and it made me doubt my...\" Her tone is assertive and brimming with high energy, every phrase delivered with spirited conviction and a commanding presence. The voice remains smooth and steady, carrying an unmistakably positive intensity that feels both animated and unapologetically bold, as she passionately recounts her frustrations."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech, delivered by a clear, fluent female speaker, conveys frustration and exasperation, with a slightly fast pace and emotional intensity. The transcription reveals self-doubt and struggle, indicating a challenging personal experience. Audio features show moderate pitch variation , low jitter , and stable loudness, suggesting vocal control despite emotion. Predicted emotion is \"sad,\" aligning with the speaker’s overwhelmed tone. High SNR  and moderate reverb  indicate good audio quality. Speaker similarity points to Lindsey Morgan , suggesting vocal resemblance. Overall, the speech reflects emotional distress in a well-articulated, high-quality delivery."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_0221_0116.wav",
+      "src": "assets/audio/MSP-PODCAST_0221_0116.wav",
+      "label": "Sample 32",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A male speaker delivers the words, \"I will drink again. I know I'm going to drink again and I'm going to get drunk again, but I'm never going to do fucking that again,\" with fierce, commanding energy. His voice is forceful and assertive, projecting loudly and filling the space with relentless intensity. The fast-paced delivery underscores his agitation, while a hint of rawness and strain edges his otherwise smooth tone, conveying both conviction and a turbulent resolve."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech reveals a conflicted, emotionally charged declaration of relapse and resolve. The transcript shows a man acknowledging future drinking but rejecting a past behavior , indicating internal struggle. Audio features indicate moderate pitch , low pitch variability , and steady loudness , suggesting controlled, deliberate delivery. Low jitter and stable F1 suggest vocal stability. Predicted emotion is \"sad,\" aligning with the introspective tone. High SNR  and moderate reverb  confirm clear audio quality. Speaker similarity points to Steve Carell  and Gerald McCullouch, hinting at a recognizable, expressive male voice with a conversational, emotionally resonant style."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_0685_0506_0004.wav",
+      "src": "assets/audio/MSP-PODCAST_0685_0506_0004.wav",
+      "label": "Sample 33",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A female speaker declares, \"and I was like, no, she's not faking it. this is fucking real. and,\" with a vivid, assertive energy. Her words are delivered at a confident, steady pace, her tone firm and commanding, leaving little room for doubt. The voice carries a clear and polished quality, underscoring her intensity and conviction without any harshness or strain."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech conveys shock and intensity, with the speaker emphatically asserting that a situation is \"fucking real,\" indicating genuine surprise and emotional urgency. Audio features reveal a stable pitch , low pitch variation , and moderate loudness, suggesting controlled yet heightened emotion. Low jitter and high SNR  indicate clear, stable vocal production. The predicted emotion is \"surprised,\" aligning with the transcript’s urgency. Audio quality is strong, with minimal reverberation . Speaker similarity points to Raina Hein and Bitsie Tulloch , suggesting a possible resemblance in vocal timbre, though not definitive. Overall, the speech reflects a moment of visceral realization, delivered with emotional clarity and technical audio fidelity."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_0721_0365_0004.wav",
+      "src": "assets/audio/MSP-PODCAST_0721_0365_0004.wav",
+      "label": "Sample 34",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A male speaker delivers the line, \"my house, and give me my keys later, or you can just sit outside, and keep patrolling my,\" with a commanding and assertive presence. His voice resonates with a deep, booming quality that fills the space, projecting a sense of confidence and control. The tone is energetic and spirited, yet the rough, slightly grating edge in his delivery hints at underlying agitation or impatience. This medium-paced speech pulses with intensity, leaving no doubt about his firm stance."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech, delivered by a male speaker with a calm yet weary tone, conveys frustration or irritation, as indicated by the predicted emotion of \"angry.\" The transcript reveals a fragmented command: \"My house, and give me my keys later, or you can just sit outside and keep patrolling my...\" suggesting a confrontational or dismissive interaction. Audio features show stable pitch , low jitter, and clear vocal quality. High SNR  and moderate reverberation  confirm good recording quality. Speaker similarity scores point to resemblance with Conan O’Brien, James Wolk, and Charles Tillman , indicating a vocal match with no strong resemblance to any single individual. The sentence cuts off mid-thought, leaving the message incomplete."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_2401_0271.wav",
+      "src": "assets/audio/MSP-PODCAST_2401_0271.wav",
+      "label": "Sample 35",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A female speaker delivers, \"..again, one of those things where I think in the senate report said eventually by 2012 or 13, then they did start just deleting ads that had the banned terms,\" in a manner that radiates bright enthusiasm and spirited confidence. Her words tumble out at a brisk, animated pace, brimming with cheerful energy and an assertive, upbeat presence. Though her voice is gentle and soft in volume, it remains clear and smooth, carrying a sense of optimism and poised assurance throughout her lively explanation."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The audio features a clear, conversational female voice  discussing a 2012–2013 policy shift in ad deletion due to banned terms, referencing a Senate report. Speech is fluent, neutral in emotion, with stable pitch , low jitter, and high audio quality . Loudness and F1 features suggest natural vocal production. The clip ends abruptly mid-sentence, indicating it’s an excerpt. Speaker resemblance is strongest to Trish Stratus , with slight similarity to Bijou Phillips. Overall, it’s a calm, reflective, well-recorded recollection of a digital policy change, likely from a podcast or interview."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_2053_1256.wav",
+      "src": "assets/audio/MSP-PODCAST_2053_1256.wav",
+      "label": "Sample 36",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A male speaker delivers the phrase \"they helped the rich. obama's obamacare\" with a spirited, upbeat energy and a clear sense of confidence and authority. His voice carries steady strength and assuredness, though a subtle roughness edges his tone, lending it a slightly gritty, unpolished texture. He speaks at a measured, unhurried pace, his words resonating with assertive enthusiasm and approachability."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech is a brief, emotionally charged political statement: \"They help the rich, Obama's Obamacare.\" Audio analysis reveals a male speaker with a strong, assertive voice, high pitch variability , and elevated loudness, indicating intensity. Predicted emotion is \"angry,\" supported by high jitter and vocal stress markers. Audio quality is good , though moderate reverberation  suggests a slightly echoey environment. The speaker’s vocal characteristics resemble those of Carl Barât, Thomas Lennon, and Jeff Daniels , but no exact match. The delivery is confrontational, likely from a political commentator, emphasizing criticism of healthcare policy. Overall, the speech conveys strong partisan sentiment with clear emotional intent. "
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_0670_1105.wav",
+      "src": "assets/audio/MSP-PODCAST_0670_1105.wav",
+      "label": "Sample 37",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A female speaker delivers the phrase \"he wants journalists to write down\" with a spirited, assertive presence. Her voice rings out loud and clear, marked by a high, lively pitch that radiates confidence and enthusiasm rather than dissatisfaction. Despite her energetic projection, she maintains a measured, unhurried pace, allowing each word to resonate distinctly with a smooth, polished tone that commands attention."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech features a female speaker with a clear, standard American accent delivering a declarative statement: \"He wants journalists to put on, he wants journalists to write down.\" Audio analysis reveals stable pitch , low jitter, and moderate loudness, indicating controlled, neutral speech. Emotion recognition classifies the tone as neutral, with slight hesitation suggesting deliberation. High SNR  and moderate reverb  suggest good audio quality with minimal background noise. Speaker similarity points to resemblance with Essence Atkins  and Star Jones , indicating a plausible match to known public figures with similar vocal traits. The repetition and pause imply intentional emphasis, possibly in a formal or instructional context."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_0175_0176.wav",
+      "src": "assets/audio/MSP-PODCAST_0175_0176.wav",
+      "label": "Sample 38",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A male speaker delivers his words with commanding intensity, his deep, resonant voice booming with energetic force. He rattles off, \"decide that they don't like somebody shut down their account and they've done this. similarly, nobody owns their website today. people think that they own their website,\" at a breathless, rapid pace. His speech is infused with a gruff, gritty edge—each sentence laced with a rough, strained texture that adds a sense of urgency and unyielding authority to his critique."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech excerpt discusses digital autonomy, noting that users can block others online and no one truly owns their website. Audio analysis reveals a neutral emotional tone, with stable pitch , low jitter, and consistent loudness, indicating calm, controlled delivery. High SNR  and moderate reverb  suggest clear, well-recorded audio with minimal background noise. Pitch and spectral features show moderate variability, typical of natural speech. Speaker similarity identifies Robert Herjavec as the closest match , with Fabiano Caruana also showing resemblance, though not strongly. The vocal characteristics align with a confident, measured speaker, likely delivering a thoughtful, technical commentary."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_0809_0817.wav",
+      "src": "assets/audio/MSP-PODCAST_0809_0817.wav",
+      "label": "Sample 39",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A female speaker exclaims with vibrant intensity and assertive energy, her voice ringing out loudly and at a brisk, hurried pace. She asks, \"but we don't even have a diploma. do we even have anybody at the diplomatic posts,\" her tone piercing and high-pitched, projecting unwavering confidence and command. Though her delivery is clear and mostly smooth, there is a slight edge of rawness that adds to the sense of passionate urgency and engagement."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech is a brief, emotionally charged exchange in a public setting, likely a press briefing. The woman speaker expresses urgent disbelief about the absence of U.S. diplomats in Afghanistan, using rising intonation and a high-pitched, anxious tone. Audio features reveal a stable pitch , low jitter, and moderate loudness, consistent with controlled but tense speech. Predicted emotion is *fear*, supported by vocal stress markers. The man’s abrupt “Oh no, no, no” conveys exasperation and dismissal. Audio quality is moderate—slight reverberation and background hiss, but clear speech. Speaker similarity suggests resemblance to British actresses Chiara Francini, Penelope Wilton, and Miriam Margolyes , indicating a plausible British accent, though the content implies an American context. The exchange critiques U.S. diplomatic presence, highlighting policy concern."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_0722_0250.wav",
+      "src": "assets/audio/MSP-PODCAST_0722_0250.wav",
+      "label": "Sample 40",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A female speaker delivers the warning, \"you really shouldn't be seen anywhere near this,\" with commanding confidence. Her voice is robust and assertive, resonating with a deep, full-bodied tone that's both powerful and energetic. She speaks quickly and decisively, her words propelled by a sense of urgency and unwavering authority. The sound is clear and polished, with no hint of shakiness, making her caution feel both forceful and compelling."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech, delivered by a female speaker, conveys a serious, cautionary warning: \"You really shouldn't be seen anywhere near this.\" Audio analysis reveals a stable pitch , low pitch variability , and moderate loudness, suggesting controlled, deliberate delivery. Low jitter indicates vocal stability. The predicted emotion is *disgust*, reflecting unease or revulsion. High SNR  and moderate reverb  suggest clear, slightly echoic recording quality. Speaker similarity points to Amanda Knox , Annet Mahendru, and Hilary Swank, indicating a resemblance to these actresses, particularly in vocal timbre and intonation. Overall, the speech projects urgency and moral disapproval through a calm yet intense vocal delivery."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_2343_0718.wav",
+      "src": "assets/audio/MSP-PODCAST_2343_0718.wav",
+      "label": "Sample 41",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A female speaker delivers the line \"to go to their nine to five. yeah, they can probably make more than that.\" with an energetic, upbeat flair. Her voice rings out clearly and confidently, projecting a strong, assertive presence that commands attention. The pace is brisk and lively, and her words tumble out quickly, underscored by a noticeable roughness—a slightly raspy edge that adds a sense of urgency and texture. The overall effect is engaging and spirited, drawing listeners in with her bold, animated delivery."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The audio features indicate a calm, neutral-toned conversation between two speakers in a quiet indoor setting. The transcription reveals a fragmented exchange about people working nine-to-five jobs and earning money, likely discussing alternative income sources. F0 and loudness features suggest moderate pitch and volume with low variability, aligning with neutral emotion. Audio quality is generally clear, though marred by a sudden electronic buzz that cuts off the speech. The low jitter and stable pitch reflect relaxed, natural speech. Speaker similarity scores are low , indicating no strong resemblance to known public figures like Nawal Al Zoghbi or Phyllis Diller. Overall, the clip captures an informal, unresolved dialogue with technical interruption."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_0167_0249.wav",
+      "src": "assets/audio/MSP-PODCAST_0167_0249.wav",
+      "label": "Sample 42",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A female speaker delivers the line \"a lot of people who didn't really know what it was including me\" with a lively, upbeat energy and confident presence. Her voice is clear and smooth, projecting loudly and rapidly, giving her words a sense of animated assurance rather than subdued reflection. The brisk pace and assertive tone convey someone who is both engaged and self-assured, far from disengaged or critical."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech is a fragmented, conversational utterance by a female speaker: \"when people didn't really know what it was, including me, but for...\" The audio features indicate a stable pitch , low pitch variation , and moderate loudness. Jitter is minimal, suggesting vocal stability. Emotion is classified as neutral, with no strong affective cues. Audio quality is high , indicating clear recording. Speaker similarity points to Alex Borstein, Norah O’Donnell, and Stockard Channing , suggesting a vocal resemblance to these actresses, particularly in tone and cadence. The speech trails off, implying incompleteness or hesitation. Overall, it reflects a calm, introspective, and slightly uncertain delivery."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_0175_0331.wav",
+      "src": "assets/audio/MSP-PODCAST_0175_0331.wav",
+      "label": "Sample 43",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A male speaker delivers the line, \"we've established that a 51% attack, at most, could maybe censor new entries into the blockchain,\" with a confident and upbeat tone. His deep, resonant voice radiates a sense of authority and assurance, projecting a steady, commanding presence. Though his energy is high and engaging, the pace is measured and unhurried, allowing each word to land clearly. There’s a subtle roughness to his voice, lending it a slightly gritty edge that adds character without detracting from its overall clarity."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech, delivered by a male speaker with a calm, analytical tone, discusses the limited impact of a 51% attack on blockchain—confined to censoring new entries. Audio features reveal stable pitch , minimal jitter, and consistent loudness, indicating controlled, deliberate speech. Emotion recognition classifies the tone as neutral, aligning with the factual content. High SNR  and moderate reverb  suggest clear, well-recorded audio with slight room echo. Speaker similarity points to resemblance with John Francis Daley , John Gallagher Jr. , and J.R. Martinez , indicating a plausible match to these male voices. Overall, the speech is technically clear, emotionally neutral, and analytically precise."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_2343_0227.wav",
+      "src": "assets/audio/MSP-PODCAST_2343_0227.wav",
+      "label": "Sample 44",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A male speaker delivers the line \"i don't know. if you win the baseball players? i think\" in a spirited, upbeat manner, his voice carrying a vivid, energetic charge that feels both assertive and lively. The tone is high-pitched and loud, easily capturing attention, while the fast, breathless pace adds a sense of urgency and excitement. His speech has a raspy, unpolished edge, lending an invigorating texture to his confident delivery."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The audio features reveal a brief, informal exchange in a quiet indoor setting. The woman’s hesitant, questioning tone  with a low pitch  and subdued loudness suggests uncertainty. Her voice shows minimal jitter and stable pitch, indicating calmness. The predicted emotion is \"surprised,\" aligning with her tentative delivery. The male interjection  is casual and playful. A sudden low-frequency bleep abruptly cuts off the response, indicating censorship—likely for sensitive content. Audio quality is high , suggesting professional recording. Speaker similarity scores  point to resemblance with Kristina Mladenovic, Lauren Vélez, and Kim Clijsters, but no strong match. The clip appears to be a censored broadcast excerpt from a lighthearted, speculative conversation."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_0538_0065_0003.wav",
+      "src": "assets/audio/MSP-PODCAST_0538_0065_0003.wav",
+      "label": "Sample 45",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A male speaker delivers the line, \"the founding legislation of any age calls for the agency to attend to the circumstances of contemporary life,\" with a calm and confident presence. His voice carries a low, resonant tone, exuding assurance and warmth. The delivery is steady and measured, inviting thoughtful engagement with its smooth, clear texture—the sound is grounded and welcoming, displaying a quiet authority without becoming forceful or overly animated."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech features a male speaker with a clear, mid-range voice and standard American accent, delivering a formal, declarative statement about the NEH’s founding legislation. Audio quality is excellent, with high SNR  and moderate reverb , indicating minimal noise and slight echo. Pitch  and loudness are stable, with neutral emotional tone. Jitter and formant features suggest vocal stability. Speaker similarity scores point to resemblance with David Petraeus , Rick Perry , and Amitabh Bachchan , though none are highly similar. The transcript reflects a formal, policy-oriented message emphasizing relevance to contemporary life. Overall, the speech is professional, clear, and technically well-produced."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_0167_0233_0003.wav",
+      "src": "assets/audio/MSP-PODCAST_0167_0233_0003.wav",
+      "label": "Sample 46",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A female speaker delivers the phrase \"from going from a presentational style of standup to a conversational style\" with a vivid, upbeat energy that radiates confidence. Her voice rings out clearly and forcefully, brimming with enthusiasm and assertiveness. She speaks at a quick, lively pace, her words riding on a bold, projecting tone that grabs attention. While her delivery is mostly smooth, there is a faint gritty edge to her voice, adding a touch of raw excitement to her animated style."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech, transcribed as \"From going from a presentational style of stand up to a conversational style,\" reflects a shift in delivery tone, likely from formal to informal. Audio features indicate a stable pitch , low pitch variation , and moderate loudness , suggesting a calm, controlled delivery. Jitter is minimal , indicating vocal stability. Emotion recognition predicts \"neutral,\" aligning with the measured tone. Audio quality is fair , with moderate reverberation , possibly from a room echo. Speaker similarity shows resemblance to Annie Parisse , Tamsen Fadal, and Caterina Scorsone , suggesting a female speaker with a similar vocal timbre. Overall, the speech conveys a reflective, neutral tone with a focus on evolving performance style."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_0730_0081_0003.wav",
+      "src": "assets/audio/MSP-PODCAST_0730_0081_0003.wav",
+      "label": "Sample 47",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A female speaker declares, \"and do you know what? we had to walk around,\" her voice radiating bright positivity and spirited enthusiasm. She delivers her words with a high, lively tone that rings out clearly and boldly, projecting a confident, assertive presence. The pace is steady and engaging, and her speech flows with a smooth, polished clarity, making her energy infectious without ever feeling overwhelming."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech features indicate a woman speaking with a neutral to slightly elevated pitch , minimal pitch variation , and consistent loudness. The predicted emotion is \"surprised,\" suggesting an unexpected or emphatic tone. Audio quality is high , indicating clear recording. F1 frequency data is inconclusive due to 'u' values. Jitter is low, implying stable vocal production. Speaker similarity to Karita Mattila is moderate , suggesting some vocal resemblance but not strong match. The transcript reveals a rhetorical question about walking, likely expressing disbelief or frustration. Overall, the speech is clear, emotionally charged, and delivered with controlled vocal dynamics."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_0184_0353.wav",
+      "src": "assets/audio/MSP-PODCAST_0184_0353.wav",
+      "label": "Sample 48",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A male speaker delivers the words, \"so yeah, they're not fixed supply. and the important thing is, they're not sort of the best thing in the world. the real,\" with vivid enthusiasm and commanding confidence. His voice is loud and energetic, rushing forward at a brisk, hurried pace. The tone is assertive and upbeat, but it carries a noticeable roughness—gritty and slightly strained—that adds an unpolished edge to his animated delivery."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech features a male speaker with a clear, slightly nasal voice, speaking conversationally and hesitantly. Audio analysis shows moderate pitch , low pitch variability, and average loudness, indicating a calm, neutral delivery. Emotion recognition predicts \"neutral\" with no strong affect. The audio quality is high , suggesting clear recording. The transcript is fragmented, cutting off mid-sentence: \"The real...\". Speaker similarity identifies Hank von Helvete and Sammy Adams as closest matches , indicating possible vocal resemblance. Overall, the speaker discusses supply and value, implying a topic on scarcity or worth, but the incomplete nature limits full interpretation."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_0224_0098.wav",
+      "src": "assets/audio/MSP-PODCAST_0224_0098.wav",
+      "label": "Sample 49",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A male speaker delivers the line, \"set up these front end funnels, but not using video, using email and blog posts,\" with a robust and energetic presence. His voice is deep and resonant, booming with commanding assertiveness and brimming with lively, upbeat energy. He speaks at a rapid, driven pace, his tone both forceful and confident, yet textured with a hint of gritty roughness that adds vigor to his delivery. The overall effect is one of animated authority, making his message sound both persuasive and engaging."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speaker delivers a clear, confident message about building front-end marketing funnels using email and blog posts instead of video. Audio analysis reveals stable pitch , low jitter, and consistent loudness, indicating a calm, controlled delivery. Emotionally, the speech is neutral, with no strong affective cues. Audio quality is high—minimal noise  and moderate reverb , suggesting a well-recorded environment. The voice resembles Steven Finn , Philippe Cousteau , and Will Swenson , indicating a mid-range vocal similarity to public figures. Overall, the speech is professional, focused, and technically well-produced."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_0202_0090.wav",
+      "src": "assets/audio/MSP-PODCAST_0202_0090.wav",
+      "label": "Sample 50",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A female speaker addresses her audience with a vibrant, animated energy, her words brimming with confidence and positivity. She says, \"24 months later, they come back to us and they say, what do I do now with this deposit bond?\" Her voice rings out loud and clear, with a bright, high-pitched quality that commands attention. The delivery is assertive and spirited, while the texture of her voice carries a subtle gritty edge, adding intensity and charisma to her engaging presence."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech, delivered by a female speaker, conveys a neutral emotional tone with a clear, slightly concerned delivery. Audio features indicate stable pitch  and low jitter, suggesting controlled, steady vocal production. Loudness and F1 frequency data show moderate, consistent vocal intensity. High SNR  and moderate reverberation  imply good audio quality with slight room echo. The transcript reveals a professional context involving financial settlement of a deposit bond after 24 months. Speaker similarity scores  suggest resemblance to actresses Lesley Manville, Ruth Jones, and Shobna Gulati, likely due to vocal timbre or speech rhythm. Overall, the speech reflects a calm, informative tone in a formal setting."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_2343_1091.wav",
+      "src": "assets/audio/MSP-PODCAST_2343_1091.wav",
+      "label": "Sample 51",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A male speaker delivers the words \"bear with me. trump can't beat hates trump so much.\" in a deep, booming voice that fills the space with its low, resonant pitch. Although his speech is slow and measured, there is a pronounced roughness to his tone—a gravelly, strained quality that makes his delivery sound worn and raw. Despite the powerful volume, his underlying demeanor feels subdued and somewhat resigned, lacking assertiveness and carrying a hint of vulnerability beneath the surface."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The audio features reveal a 5-second, low-fidelity, indoor conversation with a male speaker exhibiting a standard North American accent. The transcription shows a fragmented, conversational exchange: “Bear with me, Trump can't be hates Trump so much,” indicating informal, possibly humorous discourse about Donald Trump’s perceived animosity. Audio features suggest moderate pitch stability , low jitter, and consistent loudness, indicating clear but slightly muffled speech. The predicted emotion is “happy,” aligning with a light, exasperated tone. Background noise is minimal, with slight reverb and a high SNR , suggesting decent recording quality despite low fidelity. Speaker similarity scores point to resemblance with Jonathan Groff and Adewale Akinnuoye-Agbaje, though none are highly similar. The abrupt ending and conversational style imply a spontaneous, unscripted moment."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_0596_0452.wav",
+      "src": "assets/audio/MSP-PODCAST_0596_0452.wav",
+      "label": "Sample 52",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A female voice bursts out with vivid, animated energy, her words tumbling out in a fast, breathless rush: \"guys as friends. so, he wouldn't go away. oh, god. he was hovering over us and then he kept then he was trying to talk and like\". Her high-pitched tone rings out clearly, driven by a forceful, commanding presence. Though her delivery is intense and insistent, the texture of her voice is mostly smooth with just a touch of roughness, adding a lively edge to her urgent storytelling."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech features a female speaker recounting a tense, animated encounter with a man who persistently hovered over her and friends, attempting to engage despite discomfort. Audio analysis reveals a high-pitched, variable pitch , low pitch variability , and a surprised emotional state. Loudness is moderate with low variation, suggesting controlled but urgent delivery. The speech is fast-paced, with minimal jitter, indicating clear articulation. Audio quality is good , enhancing intelligibility. Speaker similarity points to Simona Ventura , DJ Qualls , and Lalah Hathaway , suggesting a vocal resemblance to these public figures, particularly in tone and rhythm."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_2425_0441.wav",
+      "src": "assets/audio/MSP-PODCAST_2425_0441.wav",
+      "label": "Sample 53",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A female speaker delivers the question, \"what would be the trolliest of all trolley places to be?\" with a vivid, spirited energy. Her voice is lively and upbeat, carrying a bright, enthusiastic tone that rings out loud and clear. She speaks at a brisk, rapid pace, and though her voice maintains a generally smooth quality, there is a hint of grittiness that gives her words a playful edge, perfectly capturing her animated curiosity."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speaker, a male, poses a lighthearted, rhetorical question: \"What would be the trollest of all trolley places to be?\" The audio is clear with high SNR  and moderate reverb , indicating clean recording conditions. Pitch features show stable F0 , with minimal variation, suggesting a calm, deliberate tone. Loudness and F1 frequency are consistent, indicating steady vocal effort. Jitter is low, confirming vocal stability. The predicted emotion is \"surprised,\" aligning with the playful, curious tone. Speaker similarity points to Cobie Smulders  and Rory Kennedy , though these are likely coincidental matches due to vocal texture. Overall, the speech is casual, clear, and emotionally engaged, reflecting a humorous, speculative inquiry."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_2058_0370.wav",
+      "src": "assets/audio/MSP-PODCAST_2058_0370.wav",
+      "label": "Sample 54",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A male speaker delivers the phrase \"splitting coins that actually is tenable, and in that case, bit148 might become\" with a vibrant, upbeat energy and an unmistakably positive, confident demeanor. His voice rings out loud and clear, commanding attention with its assertive presence. Beneath the assured delivery, there’s a rough, slightly raspy edge to his voice, adding a raw and dynamic texture to his speech. The tempo is steady and conversational, making his explanation sound both engaging and self-assured."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech, delivered by a male speaker with a calm, analytical tone, discusses the technical feasibility of \"splitting coins\" in Bitcoin, referencing BIP 148 as a plausible example. The transcription reveals fragmented, technical language, suggesting a focused, intellectual delivery. Audio features indicate stable pitch , low jitter, and consistent loudness, reflecting controlled speech. Emotionally, the speaker is neutral, with no signs of agitation. Audio quality is high , ensuring clarity. Speaker similarity scores point to resemblance with David Anders , W. Brett Wilson , and Robert Herjavec , suggesting a professional, articulate vocal style common among tech commentators. Overall, the speech conveys technical precision with minimal emotional inflection."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_2329_1578.wav",
+      "src": "assets/audio/MSP-PODCAST_2329_1578.wav",
+      "label": "Sample 55",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A woman says, \"I don't know. It's a messy—I'm not sure where you would draw,\" in a voice that carries a touch of warmth and positivity. Her words flow at a steady, conversational pace, underpinned by a low, mellow tone that feels grounded and unhurried. The volume is moderate, never overpowering, and her voice, while generally smooth, carries a hint of roughness—just enough to add a textured, lived-in quality. The overall impression is thoughtful and approachable, with a subtle vibrancy rather than detachment."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech features reveal a hesitant, uncertain female speaker with a neutral emotional state, low pitch variability , and minimal loudness variation, suggesting subdued delivery. Audio quality is moderate, with a SNR of 14.5 dB and noticeable reverberation , indicating a possibly enclosed recording space. The transcript shows fragmented, introspective speech , reflecting uncertainty. F1 frequency and jitter values suggest stable vocal formants and minimal vocal tremor. Speaker similarity scores are low , indicating no strong resemblance to known voices like Billy Gardell or Amélie Nothomb. A male interjection follows, seeking clarification, highlighting a conversational exchange marked by hesitation and ambiguity."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_2337_0025.wav",
+      "src": "assets/audio/MSP-PODCAST_2337_0025.wav",
+      "label": "Sample 56",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A male speaker quietly admits, \"no. i'm overweight.\" His voice is gentle and subdued, carrying a soft, low volume that lends a sense of intimacy rather than overt melancholy. He maintains a slow, measured pace, sounding calm and composed, with a smooth, clear tone that subtly hints at acceptance rather than disappointment."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech features a man stating, \"I am overweight,\" with a low, stable pitch  and minimal pitch variation, suggesting a subdued, introspective tone. Loudness is moderate with low variability, indicating controlled delivery. The predicted emotion is \"sad,\" aligning with the self-deprecating content. Audio quality is high , ensuring clarity. F1 frequency data is inconclusive due to 'u' . Jitter is minimal, indicating vocal stability. Speaker resemblance is weak to notable figures like Jen-Hsun Huang, Mike Huckabee, and Maureen Lipman , suggesting no strong match. Overall, the utterance conveys personal vulnerability with clear, emotionally resonant delivery."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_2336_1067.wav",
+      "src": "assets/audio/MSP-PODCAST_2336_1067.wav",
+      "label": "Sample 57",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A female speaker gently states, \"she's a mother. yep.\" Her tone is even and calm, carrying a soft warmth and relaxed composure. She speaks at a leisurely, unhurried pace, and her voice is clear and steady, without any harshness or agitation. Despite the tranquility, there is a touch of timidity in her delivery, suggesting a sense of quiet reserve."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The audio clip is a brief, 3-second exchange in a quiet indoor setting. The male speaker  says, \"I'm not hurt,\" calmly. A female speaker responds, \"She's a mother,\" with a tone of surprise, confirmed by emotion prediction. The male replies, \"Yep,\" affirming the statement. Audio features show moderate pitch variation , low jitter, and clear vocal quality . Emotion is classified as \"surprised.\" Audio quality is high, with no background noise. Speaker similarity suggests resemblance to Lisa Raitt, Rakhi Sawant, and Gail Simmons , but no strong match. The interaction is casual, likely part of a broader informal conversation, possibly among acquaintances, with minimal emotional intensity despite the surprise."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_0001_0148.wav",
+      "src": "assets/audio/MSP-PODCAST_0001_0148.wav",
+      "label": "Sample 58",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A male speaker delivers the words, \"that what makes it so terrifying for me is the building dread throughout. and the fact that you're never safe,\" with a powerful sense of urgency and command. His voice, though quietly spoken, radiates a steady intensity, conveying both authority and underlying fear. The tone is low and resonant, carrying a subtle roughness that adds a raw edge, while his speech is measured yet charged, capturing the relentless unease and looming tension he describes."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech conveys deep fear, with the speaker describing \"building dread\" and perpetual unease. Audio analysis reveals a calm, low-pitched male voice , minimal pitch variation , and steady loudness, suggesting controlled intensity. Jitter is slightly elevated, indicating subtle vocal tension. The predicted emotion is \"fear,\" aligning with the content. Audio quality is high , with moderate reverb , suggesting a slightly enclosed space. Speaker similarity points to Tim Boetsch , Bryant Gumbel , and Ben Lee , indicating a plausible resemblance to public figures with similar vocal timbres. Overall, the delivery enhances the eerie, suspenseful tone."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_2329_0776.wav",
+      "src": "assets/audio/MSP-PODCAST_2329_0776.wav",
+      "label": "Sample 59",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A male speaker rapidly delivers the phrase \"pushing on all the banks and you have to make a certain number of loans to black people. and it's like, well, there's your\" in a tone that strikes a balance between composure and engagement. His voice is deep and mellow, with a steady, clear quality and a natural level of loudness. The brisk, energetic tempo gives his words a sense of urgency, yet he maintains a conversational, even-tempered manner throughout."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech features a male speaker with a clear, conversational delivery and a slightly exasperated tone, discussing a policy requiring banks to issue a set number of loans to Black individuals. Audio analysis shows stable pitch , minimal jitter, and consistent loudness, indicating controlled vocal production. The predicted emotion is neutral, despite the exasperated tone. High SNR  and moderate reverb  suggest good audio quality with slight room echo. Speaker similarity points to Nick Thune and Fabiano Caruana , but no strong resemblance. The transcript reveals a critical, policy-focused narrative, likely from a commentary or discussion context."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_0713_0181.wav",
+      "src": "assets/audio/MSP-PODCAST_0713_0181.wav",
+      "label": "Sample 60",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A female speaker exclaims, \"how am I going to get through this podcast? right, yeah.\" Her words burst forth with vibrant, high-spirited energy and a commanding, self-assured presence. The tone is lively and upbeat, carried by a bright, high-pitched voice that projects loudly and clearly. Her speech flows at a steady, conversational pace, and the smooth, polished quality of her voice underscores her confidence and enthusiasm."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speaker, a woman, expresses mild stress and humor in her tone while asking, \"How am I going to get through this podcast?\" Her vocal pitch  is stable, with minimal variation, indicating controlled emotion. Audio features show low jitter and consistent loudness, suggesting clear, steady speech. The predicted emotion is \"happy,\" aligning with her lighthearted, slightly exasperated tone and a soft chuckle. A second male voice responds briefly with amusement. Audio quality is high—clear, low noise , minimal reverb—indicating a quiet, close-mic recording. Speaker similarity points to Bar Refaeli  and Pip Pellens , suggesting a possible resemblance in vocal timbre, though not definitive. Overall, the clip captures a casual, humorous exchange with professional audio quality."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_0709_0023_0002.wav",
+      "src": "assets/audio/MSP-PODCAST_0709_0023_0002.wav",
+      "label": "Sample 61",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A female speaker delivers the line \"when there's just movies that just don't deserve this accolade\" with a poised, upbeat tone. Her voice, though gentle and subdued in volume, carries a confident, assured quality. She speaks at a measured, unhurried pace, with her words emerging clear and steady, reflecting high spirits and assertiveness rather than disheartenment."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech features a female speaker with a clear, slightly nasal voice delivering a critical opinion about movies unworthy of accolades. Audio analysis reveals stable pitch , low jitter, and consistent loudness, indicating a calm, controlled delivery. Emotion recognition predicts \"disgust,\" aligning with the critical tone. Audio quality is high , with minimal noise. The speaker bears resemblance to Brooklyn Sudano and Jane Kaczmarek , suggesting a similar vocal timbre. The transcript reflects a conversational, evaluative stance, emphasizing film undeserving recognition. Overall, the speech conveys a composed yet disapproving judgment on cinematic merit."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_0281_0434.wav",
+      "src": "assets/audio/MSP-PODCAST_0281_0434.wav",
+      "label": "Sample 62",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A female speaker exclaims with vivid enthusiasm and playful authority, her voice ringing out in a bright, high-pitched timbre that's both loud and impossible to ignore. Despite the slow, deliberate pace of her words, there's a crackling energy in her delivery, each phrase edged with a raspy, electrifying texture that commands attention. As she says, \"really? the gas shadows. ah, my mind was just, ka pow!\", her tone feels both animated and self-assured, bursting with expressive zest and a contagious excitement."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The audio features reveal a high-energy, humorous monologue by a young adult female speaker, characterized by exaggerated intonation and comedic timing. The transcript “Really, the gas shadows. Ugh, my mind was just.” aligns with a theatrical, mock-disgusted delivery. F0 features indicate stable pitch with slight variation, while loudness and jitter suggest controlled, expressive speech. Predicted emotion is *disgust*, consistent with the playful tone. Audio quality is excellent , recorded in a quiet, close-miked environment. Speaker similarity points to Johanna Long , Alex Morgan, and Judy Ann Santos, suggesting a vocal resemblance to known comedic or media personalities. The inclusion of exaggerated sound effects  confirms a humorous, performative context—likely internet or podcast comedy."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_0444_0619.wav",
+      "src": "assets/audio/MSP-PODCAST_0444_0619.wav",
+      "label": "Sample 63",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A male speaker exclaims, \"god. they killed more people in freaking man of steel than they did in the avengers. oh yeah. yeah. and it was an alien invasion of new york!\" His voice bursts with vivid enthusiasm and energetic command, projecting with a loud, vibrant tone that fills the space. The pace is quick and animated, reflecting his excitement and authority in the conversation. His speech is crystal-clear and smooth, brimming with confident, infectious energy that draws the listener in without ever faltering."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speaker expresses surprise and incredulity, as indicated by the predicted emotion \"surprised\" and vocal cues like raised pitch  and moderate loudness. The speech is casual, with slight exasperation evident in tone and repetition . Audio quality is clear, with high SNR  and moderate reverb , suggesting a controlled environment. Pitch and loudness variability are low, indicating steady vocal delivery. The speaker resembles Mark Emmert , though not strongly. The transcript critiques *Man of Steel*’s violence compared to *The Avengers*, highlighting emotional reaction to cinematic destruction. Overall, a clear, expressive, and emotionally charged commentary."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_2054_1346.wav",
+      "src": "assets/audio/MSP-PODCAST_2054_1346.wav",
+      "label": "Sample 64",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A male speaker recounts, \"she couldn't afford to buy a new car, and then he's just like,\" with a confident, upbeat energy that radiates enthusiasm and self-assurance. His voice is rich and deep, carrying a steady, natural volume and a smooth, clear tone. The pace is lively but not rushed, giving his storytelling a dynamic, engaging quality without overwhelming the listener."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The audio features indicate a male speaker with a calm, neutral emotional tone, delivering a narrative about financial hardship—specifically, someone unable to afford a new car. Pitch  metrics show stable intonation with minimal variation, suggesting controlled, conversational speech. Loudness and formant  features are consistent, reflecting clear articulation. Audio quality is high, with excellent signal-to-noise ratio  and moderate reverberation. Emotion recognition predicts \"neutral,\" aligning with the detached, storytelling style. Speaker similarity identifies Thomas Lennon , Fabiano Caruana , and Jeff Daniels  as closest matches, suggesting a mid-range vocal resemblance to these individuals. Overall, the speech is clear, emotionally restrained, and professionally recorded."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_2329_0214.wav",
+      "src": "assets/audio/MSP-PODCAST_2329_0214.wav",
+      "label": "Sample 65",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A male voice speaks with vibrant enthusiasm and self-assurance, his delivery booming and resonant with a deep, commanding tone that fills the space. He articulates, \"they were labeled racist. and white, and men. and the racist label doesn't really mean any,\" his speech pulsing with confident, high-spirited energy. The words flow at a steady, conversational pace, and his voice is clear and smooth, projecting a positive, engaging presence that draws in the listener."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech features a male speaker with a neutral emotional tone, delivering a measured, analytical statement about labeling groups as \"racist,\" \"white,\" and \"men.\" Audio analysis shows stable pitch , low jitter, and high clarity , indicating clear, controlled speech. Low reverberation  confirms a quiet indoor setting. The female interjection adds sharp emphasis, suggesting critical engagement. Despite high audio quality, the clip ends mid-sentence. Speaker similarity suggests resemblance to Hank Green, Adam Pascal, and Julie Chen , likely due to vocal timbre or speech rhythm. The discourse centers on deconstructing social labels, reflecting a thoughtful, analytical tone on identity and bias. "
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_2424_0118.wav",
+      "src": "assets/audio/MSP-PODCAST_2424_0118.wav",
+      "label": "Sample 66",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A female speaker delivers the words \"flood tax. then you're like, okay, johnstown flood. oh, 1933.\" with unmistakable upbeat energy and confidence. Her bright, lively tone rings out at a high volume, projecting assertiveness and optimism. The pace is brisk yet controlled, and although her voice is mostly smooth, there's a hint of roughness at the edges, giving her delivery a slightly gritty, dynamic texture that enhances her animated and self-assured mood."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech features a female speaker delivering a conversational, slightly surprised tone, as indicated by the predicted emotion \"surprised.\" Audio analysis shows moderate pitch , low pitch variability , and stable loudness , suggesting controlled, calm delivery. Low jitter  and high SNR  confirm clear audio quality with minimal noise. Reverberation is moderate , indicating a slightly echoey environment. The transcript references \"Johnstown, 1933,\" likely alluding to a historical flood. Speaker similarity points to Marla Gibbs, Mary Steenburgen, and Ashley Monroe , suggesting a vocal resemblance to these actresses, particularly in tone and cadence."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_0580_0246.wav",
+      "src": "assets/audio/MSP-PODCAST_0580_0246.wav",
+      "label": "Sample 67",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A female voice delivers the line, \"pool of projects and come away, way fucking in the hole. holy shit,\" with a confident, assertive energy that radiates high spirits and self-assurance. Despite the strong, animated undertone, her words are spoken in a measured, unhurried rhythm and at a muted, restrained volume, drawing listeners in without force. Her tone is clear and steady, free from roughness, and she commands attention through her poised intensity rather than sheer loudness."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech, delivered by a young adult female, conveys surprise and frustration through informal, rapid delivery and strong expletives like \"holy shit.\" Audio features indicate stable pitch , low jitter, and moderate loudness, suggesting controlled yet emotionally charged speech. The high SNR  and moderate reverb  confirm good audio quality with minimal noise. Emotion recognition predicts \"surprised,\" aligning with the exasperated tone. Speaker similarity points to resemblance with Alia Shawkat and Kenya Moore , though not strongly. Overall, the speech reflects impulsive, emotionally charged expression with clear audio and identifiable vocal traits."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_0722_0025.wav",
+      "src": "assets/audio/MSP-PODCAST_0722_0025.wav",
+      "label": "Sample 68",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A female speaker delivers the line, \"and they all kind of looked at me like, who is that? and i was like, really,\" with vivid, energetic flair. Her voice is bright and high-pitched, projecting with confident, commanding strength and a lively, fast-paced rhythm. The tone is spirited and assertive, radiating enthusiasm and self-assurance that seizes the listener's attention. The speech flows smoothly and clearly, without any roughness, conveying a sense of bold engagement rather than discomfort."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech is a conversational anecdote delivered by a female speaker expressing surprise. The transcript reveals a moment of social awkwardness, where the speaker is met with puzzled stares, prompting her incredulous response, \"Really?\". Audio features indicate a stable pitch , low pitch variability, and moderate loudness, suggesting controlled, natural speech. The predicted emotion is \"surprised,\" aligning with the content. Audio quality is high , with minimal reverberation , indicating clear recording. Speaker similarity points to Kelli Williams, Joan Lunden, and Allison Williams , suggesting a vocal resemblance to these public figures, though not definitive. Overall, the speech conveys authentic, emotionally charged storytelling with strong vocal clarity."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_2425_0233.wav",
+      "src": "assets/audio/MSP-PODCAST_2425_0233.wav",
+      "label": "Sample 69",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A female speaker delivers the line, \"as our president would like to call her and you have her with alice walker and then they can talk about, okay, kamala harris would have left this woman,\" with pronounced enthusiasm and a buoyant energy. Her voice rings out loud and lively, moving at a brisk, animated pace that feels spirited and confident. There is a bright, assertive warmth in her delivery, projecting assurance and positivity. While her tone remains clear and mostly smooth, there is a subtle gritty edge that adds extra vibrancy and emphasis, making her presence both commanding and captivating."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speaker, a woman with a clear, articulate voice and standard American accent, delivers a conversational, neutral-toned statement referencing Perez Hilton, Alice Walker, and Kamala Harris in a hypothetical context. Audio features indicate stable pitch , minimal jitter, and consistent loudness, suggesting controlled speech. High SNR  and moderate reverb  confirm excellent audio quality with no background noise. Emotion recognition is neutral, aligning with the calm delivery. Speaker similarity points to Cheryl Casone , Andie MacDowell , and Kiran Chetry , indicating a plausible match with media personalities. The content suggests a commentary on political or cultural figures, possibly in a media or discussion setting. "
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_0917_1980.wav",
+      "src": "assets/audio/MSP-PODCAST_0917_1980.wav",
+      "label": "Sample 70",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A woman speaks with vibrant intensity, her voice brimming with assertive enthusiasm as she quickly states, \"that was earlier. that was like this month, not last year. yes.\" Her tone is unmistakably energetic and commanding, delivered at a brisk, hurried pace. The high volume and fast tempo make her speech stand out, while a subtle roughness—an unpolished, edgy rasp—underscores her forceful presence, further amplifying her sense of urgency and conviction."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech, delivered by a female speaker, corrects a misremembered timeline, clarifying an event occurred \"this month, not last year.\" Audio analysis reveals a stable pitch , low pitch variability, and moderate loudness, indicating calm, controlled speech. The predicted emotion is \"surprised,\" suggesting mild astonishment at the error. Audio quality is high , with moderate reverberation , likely due to room acoustics. Speaker similarity scores point to resemblance with Alex Borstein  and Zachary Gordon , though not strongly. The vocal features suggest a clear, articulate delivery with minimal jitter and stable formants, consistent with confident, conversational speech."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_2329_0871.wav",
+      "src": "assets/audio/MSP-PODCAST_2329_0871.wav",
+      "label": "Sample 71",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A female speaker exclaims, \"he's now heard of it. well, you've now heard of it then,\" with vivid enthusiasm and assertiveness. Her voice is deep and resonant yet booming and energetic, racing forward at a rapid, breathless tempo. The sound is gritty and rough-edged, carrying a raspy, unpolished quality that intensifies her commanding and animated delivery."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The audio features reveal a brief, high-quality, informal exchange between a male and female speaker in a quiet, dry indoor setting. The male speaker’s pitch  is stable with slight rise, indicating playful inquiry and confirmation. Low jitter and clear loudness suggest controlled, natural speech. Emotionally, the tone is neutral yet lighthearted, with subtle teasing. The female speaker’s response is matter-of-fact and slightly amused, referencing a third party . Audio quality is excellent—high SNR, minimal reverb. Speaker similarity scores are low , indicating no strong resemblance to known voices. The exchange reflects a familiar, intimate dynamic, possibly part of a narrative, where awareness of a topic is humorously acknowledged."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_2343_0749.wav",
+      "src": "assets/audio/MSP-PODCAST_2343_0749.wav",
+      "label": "Sample 72",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A male speaker delivers the line, \"when we first put them in. then we took them out, looked at them said,\" with a confident, upbeat energy. His deep, resonant voice moves quickly, conveying a sense of lively enthusiasm and assured authority. The tone is smooth and clear, free of any roughness, and his rapid delivery underscores a spirited, commanding presence."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The audio features indicate a male speaker with a stable pitch , minimal pitch variation , and neutral emotional tone. Loudness is consistent, with moderate amplitude . F1 frequency shows no significant variation, suggesting clear articulation. Jitter is low , indicating vocal stability. Audio quality is high , though moderate reverberation  suggests a slightly echoey environment. The transcript reveals a fragmented, conversational statement, possibly from a lab or observational context. Speaker similarity points to Bob Stoops and Michael Easton , indicating moderate resemblance in vocal timbre. Overall, the speech is calm, clear, and contextually ambiguous, likely part of a narrative or experimental recount."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_2401_0101.wav",
+      "src": "assets/audio/MSP-PODCAST_2401_0101.wav",
+      "label": "Sample 73",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A female speaker delivers the line, \"hosted to help bring people who exploit them to justice,\" with a vivid, assertive energy that radiates confidence and determination. Though her words are spoken in a low, almost hushed voice, the texture is noticeably rough and gravelly, lending a gritty, unpolished edge to her speech. Her tone is charged and purposeful, brimming with an underlying urgency and commanding presence that compels attention."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech, delivered by a female speaker with a clear, mid-range voice, conveys a calm, deliberate tone focused on justice for victims of exploitation. Audio features indicate stable pitch , low jitter, and consistent loudness, suggesting controlled vocal production. Emotion recognition classifies the tone as neutral, aligning with the measured delivery. Audio quality is high , with no distortion. The speaker bears moderate resemblance to Karla Souza, Trish Stratus, and Odette Annable , but no strong match. The transcript reflects a purposeful, advocacy-driven message, emphasizing accountability. Overall, the speech is professional, emotionally restrained, and technically well-produced."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_0184_0320.wav",
+      "src": "assets/audio/MSP-PODCAST_0184_0320.wav",
+      "label": "Sample 74",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A man speaks with vibrant enthusiasm, his words tumbling out at a brisk, lively pace. He declares, \"that's a great distinction. i appreciate you making that clarification,\" in a deep, resonant voice that exudes confidence and positivity. Though his tone sparkles with energy and assurance, there is a subtle roughness to his delivery, lending his speech a slightly gritty edge while remaining overall clear and commanding."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech is a brief, appreciative response: \"That's a great distinction. I appreciate you making that clarification.\" The speaker is a male with a calm, clear, mid-range voice, exhibiting neutral emotion and stable vocal features—consistent pitch , low jitter, and moderate loudness. Audio quality is high, with excellent SNR  and minimal reverberation , indicating clean recording. Pitch and loudness metrics show minimal variation, suggesting controlled, deliberate speech. Speaker similarity analysis reveals moderate resemblance to athletes Shane Battier and Charles Tillman , and Scott Porter , likely due to similar vocal timbre or speech patterns. Overall, the utterance reflects polite acknowledgment in a professional or conversational context."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_2357_0804.wav",
+      "src": "assets/audio/MSP-PODCAST_2357_0804.wav",
+      "label": "Sample 75",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A female speaker delivers the line \"we didn't really react to not having heard of it or not being taught it\" with vivid enthusiasm and cheerful assertiveness. Her voice carries a high, lively pitch and a quick, energetic pace that keeps the delivery animated. While her tone radiates positivity and confidence, her words are laced with a slightly raspy, textured edge, giving her speech a raw and dynamic quality that draws listeners in."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech features a female speaker in her 20s–30s with a strong, assertive, and fast-paced delivery in African American Vernacular English . The transcript reveals frustration or disbelief: “We really react to like not having heard of it or not being taught it.” Audio analysis shows stable pitch , low pitch variability, and moderate loudness, indicating controlled yet emphatic speech. Emotion recognition predicts neutral, but tone conveys exasperation. High SNR  and moderate reverb  suggest clear, slightly echoic recording. Speaker similarity points to Loni Love  and Foxy Brown , indicating vocal resemblance to prominent Black female public figures. Overall, the speech reflects a passionate, articulate critique of systemic gaps in education."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_2357_0089.wav",
+      "src": "assets/audio/MSP-PODCAST_2357_0089.wav",
+      "label": "Sample 76",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A female speaker delivers the line, \"that's not what I want. I wanted the show to be about isah,\" with an unmistakably cheerful and spirited tone. Despite her high, lively pitch and an air of confident enthusiasm, her voice remains soft and gentle, never rising above a quiet, delicate volume. She speaks at a measured, unhurried pace, her words flowing smoothly and clearly, radiating positivity and self-assuredness without overwhelming the listener."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speaker, a woman, delivers a hesitant, slightly flustered statement clarifying her intentions regarding \"Issa,\" using fragmented phrasing like \"I'm not, I just\" and \"that's not what I wanted to show.\" Her speech is emotionally neutral, with stable pitch  and low jitter, indicating controlled vocal production. Audio quality is high , with clear, minimal background noise. Pitch variation is modest, suggesting restrained emotion. She bears strongest resemblance to Loni Love , followed by Yvette Nicole Brown and Kenya Moore , indicating a vocal tone and rhythm consistent with these public figures. Overall, the speech reflects a defensive clarification, delivered calmly but with subtle tension."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_0218_0059.wav",
+      "src": "assets/audio/MSP-PODCAST_0218_0059.wav",
+      "label": "Sample 77",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A male speaker delivers the line, \"we eat some turkey on remembrance day, no, it's like november is like the solemn,\" with a vivid, upbeat energy. His voice is lively and confident, projecting a spirited and assertive presence. The tone is bright and animated, carried at a quick, bustling pace. While his voice is generally clear, flashes of roughness emerge, adding a touch of unpolished texture to his enthusiastic delivery."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech, delivered by a young adult male in a casual, hesitant tone, discusses the solemnity of November, likely in relation to Remembrance Day, with filler words like \"like\" indicating uncertainty. Audio features reveal a stable pitch , minimal pitch variation , and low jitter, suggesting a calm, controlled voice. Loudness is consistent, with high SNR  and moderate reverberation , indicating good audio quality. Emotion recognition predicts \"sad,\" aligning with the reflective topic. Speaker similarity is highest with Elisabeth Röhm , though resemblance is weak overall, suggesting a unique vocal identity. The speech conveys quiet introspection, fitting Remembrance Day’s tone."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_2357_0332.wav",
+      "src": "assets/audio/MSP-PODCAST_2357_0332.wav",
+      "label": "Sample 78",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A female speaker delivers the line, \"she gives you all these gestures, and as a friend, you should jump back like ok, you know, let me go, let me go talk toward,\" with vibrant enthusiasm and bright positivity. Her voice carries a high, sparkling pitch and radiates confident energy, yet she speaks in a gentle, subdued volume that gives her words a sense of intimate excitement. Her tone is clear and polished, brimming with assertive warmth and animated friendliness, inviting listeners to share in her spirited mood."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech features a female speaker with a clear, energetic, and assertive tone, delivering advice in a conversational style. Audio analysis shows stable pitch , low jitter, and consistent loudness, indicating vocal control and clarity. The predicted emotion is neutral, though the delivery conveys confidence. High SNR  and moderate reverberation  suggest good audio quality with minimal noise. Speaker similarity points to Loni Love  and Foxy Brown , indicating resemblance in vocal timbre. The transcript reflects a supportive yet firm stance on personal boundaries, emphasizing the need to respect someone’s space. Overall, the speech is articulate, emotionally controlled, and professionally delivered."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_0498_0353.wav",
+      "src": "assets/audio/MSP-PODCAST_0498_0353.wav",
+      "label": "Sample 79",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A female speaker delivers the line \"no, kyle is too? yes. he nailed it.\" with radiant enthusiasm, her voice ringing with lively, high-pitched clarity and commanding presence. Despite her slow, measured pace, each word brims with buoyant energy and confidence, her tone bright and engaging, effortlessly drawing listeners in with its spirited, uplifting quality."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The 5-second audio features a brief, high-fidelity exchange between two speakers in a quiet indoor setting. The woman’s high-pitched, youthful voice conveys playful disbelief and joy, with a spontaneous laugh and animated delivery. The man responds calmly and affirmatively, his lower pitch suggesting confidence. Audio features indicate stable pitch , low jitter, and clear vocal quality. Loudness and F1 frequency are consistent, supporting vocal clarity. Emotion recognition predicts \"happy,\" aligning with the lighthearted tone. The phrase \"you nailed it\" implies a correct guess, sparking shared amusement. Audio quality is excellent . Speaker similarity shows resemblance to Trijntje Oosterhuis , Seun Kuti , and Vanessa Feltz , suggesting a youthful, expressive female voice with a distinct timbre."
+        }
+      ]
+    },
+    {
+      "id": "MSP-PODCAST_0340_0104.wav",
+      "src": "assets/audio/MSP-PODCAST_0340_0104.wav",
+      "label": "Sample 80",
+      "captions": [
+        {
+          "id": "GT",
+          "text": "A woman bursts out with vibrant enthusiasm, her voice soaring with excitement and confidence as she declares, \"well, i'm not planning on doing this again. it was a once in a lifetime opportunity. by the way, so neil patel says hi.\" She speaks at a brisk, energetic pace, her high-pitched, resonant delivery carrying easily to listeners. There is a raspy edge to her tone, lending her words a raw, electrifying texture that amplifies her commanding presence and infectious positivity."
+        },
+        {
+          "id": "hw_llm",
+          "text": "The speech features a female speaker with a cheerful, upbeat tone, conveying happiness through vocal prosody. Pitch  is stable, with median around 3 semitones above 27.5 Hz, indicating moderate pitch range and clarity. Loudness is consistent, with low variability, suggesting controlled vocal effort. Minimal jitter and high SNR  confirm excellent audio quality, while moderate reverberation  implies a slightly echoey environment. The transcript reveals a reflective, lighthearted message about a unique experience, with a personal aside. Emotion recognition confirms happiness. Speaker similarity points to Cindy Margolis , suggesting vocal resemblance to a known public figure. Overall, the audio is clear, emotionally positive, and professionally recorded."
+        }
+      ]
+    }
+  ]
+}
