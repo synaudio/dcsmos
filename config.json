@@ -1,6 +1,6 @@
 {
   "title": "Audio Captioning Evaluation Task",
-  "description": "Please listen to the audio, and for EACH caption, rate it on Accuracy, Richness, and Overall Quality based on the guidelines on the right.",
+  "description": "Please listen to the audio samples below. For <b>EACH</b> caption option, rate it on Accuracy, Richness, and Overall Quality based on the guidelines on the sidebar.<br><br><span style='font-size: 0.9em; color: #666;'>🔒 <b>Data Privacy Notice:</b> This session does not collect any personally identifiable information (PII). All demographic data is anonymized and used solely for aggregate statistical analysis.</span>",
   "demographics": {
     "age_ranges": ["Under 18", "18-25", "26-35", "36-50", "50+"],
     "genders": ["Male", "Female","Prefer not to say"],
