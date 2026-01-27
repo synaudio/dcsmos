@@ -589,82 +589,96 @@
     // ==========================================
 
     function exportCSV() {
-        const age = document.getElementById('user_age').value;
-        const gender = document.getElementById('user_gender').value;
-        let lang = document.querySelector('input[name="native_lang"]:checked')?.value;
-        if (lang === 'Others') lang = document.getElementById('other_lang_input').value || 'Others';
+            const age = document.getElementById('user_age').value;
+            const gender = document.getElementById('user_gender').value;
+            let lang = document.querySelector('input[name="native_lang"]:checked')?.value;
+            if (lang === 'Others') lang = document.getElementById('other_lang_input').value || 'Others';
 
-        // 1. Participant Info Validation
-        if (!DEBUG_MODE) {
-            if (!age || !gender || !lang) {
-                alert("Please complete the Participant Information section at the top.");
-                document.getElementById('user-info').scrollIntoView({behavior:"smooth", block: "center"});
-                return;
-            }
-        }
-
-        let csv = "SessionID,Age,Gender,Language,AudioID,CaptionID,CaptionText,Metric,Score,Timestamp\n";
-        let firstMissingElement = null;
-        let csvRows = [];
-        
-        // 2. Data Collection & Rating Validation
-        const captionCards = document.querySelectorAll('.caption-card');
-        
-        for (const block of captionCards) {
-            const audioID = block.closest('.test-item').getAttribute('data-audio-id');
-            const capID = block.getAttribute('data-caption-id');
-            const capText = block.getAttribute('data-caption-text').replace(/,/g, ';').replace(/"/g, "'").replace(/\n/g, " ");
-
-            const ratingRows = block.querySelectorAll('.rating-row');
-            
-            for (const row of ratingRows) {
-                const metricLabel = row.querySelector('.metric-label').innerText;
-                const checked = row.querySelector('input[type="radio"]:checked');
-                
-                // VALIDATION CHECK
-                if (!checked && !DEBUG_MODE) {
-                    if (!firstMissingElement) {
-                        firstMissingElement = row;
-                    }
-                } else {
-                    const score = checked ? checked.value : "DEBUG_SKIP";
-                    const time = new Date().toISOString();
-                    csvRows.push(`${sessionID},${age},${gender},${lang},${audioID},${capID},"${capText}",${metricLabel},${score},${time}\n`);
+            // 1. Participant Info Validation
+            if (!DEBUG_MODE) {
+                if (!age || !gender || !lang) {
+                    alert("Please complete the Participant Information section at the top.");
+                    document.getElementById('user-info').scrollIntoView({behavior:"smooth", block: "center"});
+                    return;
                 }
             }
+
+            let csv = "SessionID,Age,Gender,Language,AudioID,CaptionID,CaptionText,Metric,Score,Timestamp\n";
+            let firstMissingElement = null;
+            let missingDetails = ""; // 用于记录具体的错误信息
+            let csvRows = [];
+            
+            // 清除之前的错误高亮（重置所有行的背景色）
+            document.querySelectorAll('.rating-row').forEach(row => {
+                row.style.backgroundColor = "";
+                row.style.border = "";
+            });
+
+            // 2. Data Collection & Rating Validation
+            const captionCards = document.querySelectorAll('.caption-card');
+            
+            for (const block of captionCards) {
+                const audioID = block.closest('.test-item').getAttribute('data-audio-id');
+                const capID = block.getAttribute('data-caption-id');
+                const capText = block.getAttribute('data-caption-text').replace(/,/g, ';').replace(/"/g, "'").replace(/\n/g, " ");
+                
+                // 获取当前卡片的序号（Option 1, Option 2...）用于提示
+                const optionTag = block.querySelector('.caption-tag').innerText; 
+
+                const ratingRows = block.querySelectorAll('.rating-row');
+                
+                for (const row of ratingRows) {
+                    const metricLabel = row.querySelector('.metric-label').innerText;
+                    const checked = row.querySelector('input[type="radio"]:checked');
+                    
+                    // VALIDATION CHECK
+                    if (!checked && !DEBUG_MODE) {
+                        // 如果发现未填项
+                        console.log(`Validation Failed at: Audio=${audioID}, Caption=${capID}, Metric=${metricLabel}`); // 开发者调试用
+                        
+                        if (!firstMissingElement) {
+                            firstMissingElement = row;
+                            missingDetails = `Audio: ${audioID}\n${optionTag}\nMetric: ${metricLabel}`;
+                        }
+                        
+                        // 标记为红色 (不自动消失，直到下次点击Submit才会重置)
+                        row.style.backgroundColor = "#ffe6e6"; 
+                        row.style.border = "1px solid #ffcccc";
+                        
+                    } else {
+                        const score = checked ? checked.value : "DEBUG_SKIP";
+                        const time = new Date().toISOString();
+                        csvRows.push(`${sessionID},${age},${gender},${lang},${audioID},${capID},"${capText}",${metricLabel},${score},${time}\n`);
+                    }
+                }
+            }
+
+            // 3. Handle Missing Items
+            if (firstMissingElement && !DEBUG_MODE) {
+                // 改进提示信息，告诉用户具体缺了哪里
+                alert(`You have unanswered questions!\n\nFirst missing item:\n${missingDetails}\n\n(Look for the RED highlighted rows)`);
+                
+                // Scroll to the first missing item
+                firstMissingElement.scrollIntoView({behavior: "smooth", block: "center"});
+                
+                // 【关键修改】移除了 setTimeout，让红色一直保留，直到用户看到为止
+                
+                return; // STOP execution
+            }
+
+            // 4. Finalize Export
+            csv += csvRows.join("");
+            
+            const link = document.createElement("a");
+            link.href = "data:text/csv;charset=utf-8," + encodeURI(csv);
+            link.download = `eval_results_${sessionID}.csv`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            // 5. Clean up local storage after successful submission
+            localStorage.removeItem(STORAGE_KEY);
         }
-
-        // 3. Handle Missing Items
-        if (firstMissingElement && !DEBUG_MODE) {
-            alert("You have unanswered questions. Please complete all ratings before submitting.");
-            
-            // Scroll to the first missing item
-            firstMissingElement.scrollIntoView({behavior: "smooth", block: "center"});
-            
-            // Visual cue (Highlighting)
-            const originalBg = firstMissingElement.style.backgroundColor;
-            firstMissingElement.style.backgroundColor = "#ffe6e6"; // Light red
-            
-            setTimeout(() => {
-                firstMissingElement.style.backgroundColor = originalBg;
-            }, 2000);
-            
-            return; // STOP execution
-        }
-
-        // 4. Finalize Export
-        csv += csvRows.join("");
-        
-        const link = document.createElement("a");
-        link.href = "data:text/csv;charset=utf-8," + encodeURI(csv);
-        link.download = `eval_results_${sessionID}.csv`;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-
-        // 5. Clean up local storage after successful submission
-        localStorage.removeItem(STORAGE_KEY);
-    }
 
     // ==========================================
     // [NEW] DRAFT EXPORT FUNCTION (NO VALIDATION)
