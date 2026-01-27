@@ -651,11 +651,10 @@
             // 3. Handle Missing Items with NEW INSTRUCTION
             if (firstMissingElement && !DEBUG_MODE) {
                 alert(
-                    `⚠️ You have unanswered questions!\n\n` +
+                    `⚠️ You have unanswered questions!\n\n` + 
+                    `NOTE: If the error persists please click the 'Save Draft' button to download and submit your result file.\n` + 
                     `First missing item:\n${missingDetails}\n\n` +
                     `(Look for the RED highlighted rows)\n\n` +
-                    `----------------------------\n` +
-                    `NOTE: If the error persists or you cannot find the missing item, please click the 'Save Draft' button to download and submit your result file.`
                 );
                 
                 firstMissingElement.scrollIntoView({behavior: "smooth", block: "center"});
