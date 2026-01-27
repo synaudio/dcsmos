@@ -605,10 +605,10 @@
 
             let csv = "SessionID,Age,Gender,Language,AudioID,CaptionID,CaptionText,Metric,Score,Timestamp\n";
             let firstMissingElement = null;
-            let missingDetails = ""; // 用于记录具体的错误信息
+            let missingDetails = ""; 
             let csvRows = [];
             
-            // 清除之前的错误高亮（重置所有行的背景色）
+            // Reset styles
             document.querySelectorAll('.rating-row').forEach(row => {
                 row.style.backgroundColor = "";
                 row.style.border = "";
@@ -621,8 +621,6 @@
                 const audioID = block.closest('.test-item').getAttribute('data-audio-id');
                 const capID = block.getAttribute('data-caption-id');
                 const capText = block.getAttribute('data-caption-text').replace(/,/g, ';').replace(/"/g, "'").replace(/\n/g, " ");
-                
-                // 获取当前卡片的序号（Option 1, Option 2...）用于提示
                 const optionTag = block.querySelector('.caption-tag').innerText; 
 
                 const ratingRows = block.querySelectorAll('.rating-row');
@@ -631,17 +629,14 @@
                     const metricLabel = row.querySelector('.metric-label').innerText;
                     const checked = row.querySelector('input[type="radio"]:checked');
                     
-                    // VALIDATION CHECK
                     if (!checked && !DEBUG_MODE) {
-                        // 如果发现未填项
-                        console.log(`Validation Failed at: Audio=${audioID}, Caption=${capID}, Metric=${metricLabel}`); // 开发者调试用
+                        console.log(`Validation Failed at: Audio=${audioID}, Caption=${capID}, Metric=${metricLabel}`);
                         
                         if (!firstMissingElement) {
                             firstMissingElement = row;
                             missingDetails = `Audio: ${audioID}\n${optionTag}\nMetric: ${metricLabel}`;
                         }
                         
-                        // 标记为红色 (不自动消失，直到下次点击Submit才会重置)
                         row.style.backgroundColor = "#ffe6e6"; 
                         row.style.border = "1px solid #ffcccc";
                         
@@ -653,17 +648,18 @@
                 }
             }
 
-            // 3. Handle Missing Items
+            // 3. Handle Missing Items with NEW INSTRUCTION
             if (firstMissingElement && !DEBUG_MODE) {
-                // 改进提示信息，告诉用户具体缺了哪里
-                alert(`You have unanswered questions!\n\nFirst missing item:\n${missingDetails}\n\n(Look for the RED highlighted rows)`);
+                alert(
+                    `⚠️ You have unanswered questions!\n\n` +
+                    `First missing item:\n${missingDetails}\n\n` +
+                    `(Look for the RED highlighted rows)\n\n` +
+                    `----------------------------\n` +
+                    `NOTE: If the error persists or you cannot find the missing item, please click the 'Save Draft' button to download and submit your result file.`
+                );
                 
-                // Scroll to the first missing item
                 firstMissingElement.scrollIntoView({behavior: "smooth", block: "center"});
-                
-                // 【关键修改】移除了 setTimeout，让红色一直保留，直到用户看到为止
-                
-                return; // STOP execution
+                return; 
             }
 
             // 4. Finalize Export
@@ -676,10 +672,8 @@
             link.click();
             document.body.removeChild(link);
 
-            // 5. Clean up local storage after successful submission
             localStorage.removeItem(STORAGE_KEY);
         }
-
     // ==========================================
     // [NEW] DRAFT EXPORT FUNCTION (NO VALIDATION)
     // ==========================================
