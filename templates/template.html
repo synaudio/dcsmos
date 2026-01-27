@@ -577,7 +577,6 @@
     }
 
     function clearProgress() {
-        // [Modified] Warning Text
         if (confirm("⚠️ Are you sure you want to START OVER?\n\nThis will delete all your current answers and you will have to start from the beginning.")) {
             localStorage.removeItem(STORAGE_KEY);
             location.reload();
@@ -589,90 +588,95 @@
     // ==========================================
 
     function exportCSV() {
-            const age = document.getElementById('user_age').value;
-            const gender = document.getElementById('user_gender').value;
-            let lang = document.querySelector('input[name="native_lang"]:checked')?.value;
-            if (lang === 'Others') lang = document.getElementById('other_lang_input').value || 'Others';
+        const age = document.getElementById('user_age').value;
+        const gender = document.getElementById('user_gender').value;
+        let lang = document.querySelector('input[name="native_lang"]:checked')?.value;
+        if (lang === 'Others') lang = document.getElementById('other_lang_input').value || 'Others';
 
-            // 1. Participant Info Validation
-            if (!DEBUG_MODE) {
-                if (!age || !gender || !lang) {
-                    alert("Please complete the Participant Information section at the top.");
-                    document.getElementById('user-info').scrollIntoView({behavior:"smooth", block: "center"});
-                    return;
-                }
+        // 1. Participant Info Validation
+        if (!DEBUG_MODE) {
+            if (!age || !gender || !lang) {
+                alert("Please complete the Participant Information section at the top.");
+                document.getElementById('user-info').scrollIntoView({behavior:"smooth", block: "center"});
+                return;
             }
-
-            let csv = "SessionID,Age,Gender,Language,AudioID,CaptionID,CaptionText,Metric,Score,Timestamp\n";
-            let firstMissingElement = null;
-            let missingDetails = ""; 
-            let csvRows = [];
-            
-            // Reset styles
-            document.querySelectorAll('.rating-row').forEach(row => {
-                row.style.backgroundColor = "";
-                row.style.border = "";
-            });
-
-            // 2. Data Collection & Rating Validation
-            const captionCards = document.querySelectorAll('.caption-card');
-            
-            for (const block of captionCards) {
-                const audioID = block.closest('.test-item').getAttribute('data-audio-id');
-                const capID = block.getAttribute('data-caption-id');
-                const capText = block.getAttribute('data-caption-text').replace(/,/g, ';').replace(/"/g, "'").replace(/\n/g, " ");
-                const optionTag = block.querySelector('.caption-tag').innerText; 
-
-                const ratingRows = block.querySelectorAll('.rating-row');
-                
-                for (const row of ratingRows) {
-                    const metricLabel = row.querySelector('.metric-label').innerText;
-                    const checked = row.querySelector('input[type="radio"]:checked');
-                    
-                    if (!checked && !DEBUG_MODE) {
-                        console.log(`Validation Failed at: Audio=${audioID}, Caption=${capID}, Metric=${metricLabel}`);
-                        
-                        if (!firstMissingElement) {
-                            firstMissingElement = row;
-                            missingDetails = `Audio: ${audioID}\n${optionTag}\nMetric: ${metricLabel}`;
-                        }
-                        
-                        row.style.backgroundColor = "#ffe6e6"; 
-                        row.style.border = "1px solid #ffcccc";
-                        
-                    } else {
-                        const score = checked ? checked.value : "DEBUG_SKIP";
-                        const time = new Date().toISOString();
-                        csvRows.push(`${sessionID},${age},${gender},${lang},${audioID},${capID},"${capText}",${metricLabel},${score},${time}\n`);
-                    }
-                }
-            }
-
-            // 3. Handle Missing Items with NEW INSTRUCTION
-            if (firstMissingElement && !DEBUG_MODE) {
-                alert(
-                    `⚠️ You have unanswered questions!\n\n` + 
-                    `NOTE: If the error persists please click the 'Save Draft' button to download and submit your result file.\n` + 
-                    `First missing item:\n${missingDetails}\n\n` +
-                    `(Look for the RED highlighted rows)\n\n` +
-                );
-                
-                firstMissingElement.scrollIntoView({behavior: "smooth", block: "center"});
-                return; 
-            }
-
-            // 4. Finalize Export
-            csv += csvRows.join("");
-            
-            const link = document.createElement("a");
-            link.href = "data:text/csv;charset=utf-8," + encodeURI(csv);
-            link.download = `eval_results_${sessionID}.csv`;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-
-            localStorage.removeItem(STORAGE_KEY);
         }
+
+        let csv = "\uFEFFSessionID,Age,Gender,Language,AudioID,CaptionID,CaptionText,Metric,Score,Timestamp\n"; // Added BOM for Excel
+        let firstMissingElement = null;
+        let missingDetails = ""; 
+        let csvRows = [];
+        
+        // Reset styles
+        document.querySelectorAll('.rating-row').forEach(row => {
+            row.style.backgroundColor = "";
+            row.style.border = "";
+        });
+
+        // 2. Data Collection & Rating Validation
+        const captionCards = document.querySelectorAll('.caption-card');
+        
+        for (const block of captionCards) {
+            const audioID = block.closest('.test-item').getAttribute('data-audio-id');
+            const capID = block.getAttribute('data-caption-id');
+            const capText = block.getAttribute('data-caption-text').replace(/,/g, ';').replace(/"/g, "'").replace(/\n/g, " ");
+            const optionTag = block.querySelector('.caption-tag').innerText; 
+
+            const ratingRows = block.querySelectorAll('.rating-row');
+            
+            for (const row of ratingRows) {
+                const metricLabel = row.querySelector('.metric-label').innerText;
+                const checked = row.querySelector('input[type="radio"]:checked');
+                
+                // VALIDATION CHECK
+                if (!checked && !DEBUG_MODE) {
+                    console.log(`Validation Failed at: Audio=${audioID}, Caption=${capID}, Metric=${metricLabel}`);
+                    
+                    if (!firstMissingElement) {
+                        firstMissingElement = row;
+                        missingDetails = `Audio: ${audioID}\n${optionTag}\nMetric: ${metricLabel}`;
+                    }
+                    
+                    row.style.backgroundColor = "#ffe6e6"; 
+                    row.style.border = "1px solid #ffcccc";
+                    
+                } else {
+                    const score = checked ? checked.value : "DEBUG_SKIP";
+                    const time = new Date().toISOString();
+                    csvRows.push(`${sessionID},${age},${gender},${lang},${audioID},${capID},"${capText}",${metricLabel},${score},${time}\n`);
+                }
+            }
+        }
+
+        // 3. Handle Missing Items with NEW INSTRUCTION
+                if (firstMissingElement && !DEBUG_MODE) {
+                                alert(
+                                    `⚠️ You have unanswered questions!\n\n` +
+                                    `👉 IF YOU CANNOT FIND THE MISSING ITEM:\n` +
+                                    `Please simply click the 'Save Draft' button to download and submit your result file instead.\n\n` +
+                                    `----------------------------\n` +
+                                    `First missing item details:\n${missingDetails}\n\n` +
+                                    `(Look for the RED highlighted rows)`
+                                );
+                                
+                                firstMissingElement.scrollIntoView({behavior: "smooth", block: "center"});
+                                return; 
+                            }
+
+        // 4. Finalize Export
+        csv += csvRows.join("");
+        
+        const link = document.createElement("a");
+        link.href = "data:text/csv;charset=utf-8," + encodeURI(csv);
+        link.download = `eval_results_${sessionID}.csv`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        // 5. Clean up local storage after successful submission
+        localStorage.removeItem(STORAGE_KEY);
+    }
+
     // ==========================================
     // [NEW] DRAFT EXPORT FUNCTION (NO VALIDATION)
     // ==========================================
@@ -684,7 +688,8 @@
         if (lang === 'Others') lang = document.getElementById('other_lang_input').value;
         if (!lang) lang = "Not_Provided";
 
-        let csv = "SessionID,Age,Gender,Language,AudioID,CaptionID,CaptionText,Metric,Score,Timestamp\n";
+        // Added BOM for Excel compatibility
+        let csv = "\uFEFFSessionID,Age,Gender,Language,AudioID,CaptionID,CaptionText,Metric,Score,Timestamp\n";
         let csvRows = [];
         
         const captionCards = document.querySelectorAll('.caption-card');
