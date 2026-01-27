@@ -426,8 +426,8 @@
         <div class="btn-group">
             <button class="btn-submit" onclick="exportCSV()" style="margin: 0; flex: 2;">Submit Evaluation</button>
             
-            <button onclick="saveProgress(); alert('Draft saved! You can close the browser and resume later.');" 
-                    title="Save your current answers locally to finish later"
+            <button onclick="saveProgress(); exportDraftCSV(); alert('Draft saved locally and CSV downloaded! You can resume later.');" 
+                    title="Save your current answers locally to finish later and download a backup CSV"
                     style="padding: 16px; background: #3498db; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; flex: 1; transition: background 0.2s;">
                 Save Draft
             </button>
@@ -585,7 +585,7 @@
     }
 
     // ==========================================
-    // EXPORT & VALIDATION
+    // EXPORT & VALIDATION (SUBMIT)
     // ==========================================
 
     function exportCSV() {
@@ -664,6 +664,52 @@
 
         // 5. Clean up local storage after successful submission
         localStorage.removeItem(STORAGE_KEY);
+    }
+
+    // ==========================================
+    // [NEW] DRAFT EXPORT FUNCTION (NO VALIDATION)
+    // ==========================================
+    function exportDraftCSV() {
+        // Attempt to get user info, default to "Not_Provided" if missing
+        const age = document.getElementById('user_age').value || "Not_Provided";
+        const gender = document.getElementById('user_gender').value || "Not_Provided";
+        let lang = document.querySelector('input[name="native_lang"]:checked')?.value;
+        if (lang === 'Others') lang = document.getElementById('other_lang_input').value;
+        if (!lang) lang = "Not_Provided";
+
+        let csv = "SessionID,Age,Gender,Language,AudioID,CaptionID,CaptionText,Metric,Score,Timestamp\n";
+        let csvRows = [];
+        
+        const captionCards = document.querySelectorAll('.caption-card');
+        
+        for (const block of captionCards) {
+            const audioID = block.closest('.test-item').getAttribute('data-audio-id');
+            const capID = block.getAttribute('data-caption-id');
+            const capText = block.getAttribute('data-caption-text').replace(/,/g, ';').replace(/"/g, "'").replace(/\n/g, " ");
+
+            const ratingRows = block.querySelectorAll('.rating-row');
+            
+            for (const row of ratingRows) {
+                const metricLabel = row.querySelector('.metric-label').innerText;
+                const checked = row.querySelector('input[type="radio"]:checked');
+                
+                // NO VALIDATION: Store 'NaN' if missing
+                const score = checked ? checked.value : "NaN";
+                const time = new Date().toISOString();
+                
+                csvRows.push(`${sessionID},${age},${gender},${lang},${audioID},${capID},"${capText}",${metricLabel},${score},${time}\n`);
+            }
+        }
+
+        csv += csvRows.join("");
+        
+        const link = document.createElement("a");
+        link.href = "data:text/csv;charset=utf-8," + encodeURI(csv);
+        // Filename includes _DRAFT suffix
+        link.download = `eval_results_${sessionID}_DRAFT.csv`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
     }
 
     // ==========================================
